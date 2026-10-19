@@ -81,7 +81,6 @@ export function createStackedRenderer(canvas, video) {
   const texel = gl.getUniformLocation(program, 'texel')
 
   let firstFrame = null
-  let frameCallback = 0
   let frameRequest = 0
   let running = true
 
@@ -105,19 +104,27 @@ export function createStackedRenderer(canvas, video) {
     }
   }
 
-  // one picture per decoded frame where the browser says so, otherwise per animation frame while playing
+  // A video that is 1px and transparent may never be offered to requestVideoFrameCallback on iOS, so the picture
+  // is redrawn from an animation-frame loop while the clip plays; the events cover paused states (first frame,
+  // seeking back to 0).
+  let lastTime = -1
   const tick = () => {
+    frameRequest = 0
     if (!running) return
-    draw()
-    if ('requestVideoFrameCallback' in video) frameCallback = video.requestVideoFrameCallback(tick)
-    else frameRequest = requestAnimationFrame(tick)
+    if (video.currentTime !== lastTime) {
+      lastTime = video.currentTime
+      draw()
+    }
+    if (!video.paused && !video.ended) frameRequest = requestAnimationFrame(tick)
+  }
+  const wake = () => {
+    lastTime = -1
+    if (!frameRequest) frameRequest = requestAnimationFrame(tick)
   }
 
-  const paused = () => draw()
-  video.addEventListener('loadeddata', paused)
-  video.addEventListener('seeked', paused)
-  video.addEventListener('playing', paused)
-  tick()
+  const events = ['loadeddata', 'canplay', 'seeked', 'play', 'playing', 'timeupdate', 'ended']
+  events.forEach((name) => video.addEventListener(name, wake))
+  wake()
 
   return {
     onFirstFrame(callback) {
@@ -125,10 +132,7 @@ export function createStackedRenderer(canvas, video) {
     },
     dispose() {
       running = false
-      video.removeEventListener('loadeddata', paused)
-      video.removeEventListener('seeked', paused)
-      video.removeEventListener('playing', paused)
-      if (frameCallback && 'cancelVideoFrameCallback' in video) video.cancelVideoFrameCallback(frameCallback)
+      events.forEach((name) => video.removeEventListener(name, wake))
       if (frameRequest) cancelAnimationFrame(frameRequest)
     },
   }

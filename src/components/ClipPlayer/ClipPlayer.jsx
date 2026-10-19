@@ -57,24 +57,24 @@ export default function ClipPlayer({ src, stack, poster, label, aspectRatio, fit
     }
 
     const cancelPending = () => {
-      if (onReady) video.removeEventListener('canplay', onReady)
+      if (onReady) video.ownerDocument.removeEventListener('touchend', onReady)
       onReady = null
     }
 
-    // Start from frame 0 as soon as there is data to show. Calling play() while the file is still
-    // loading would be aborted by video.load() above, so wait for it.
+    // Start from frame 0. play() is called straight away, not after "canplay": iOS ignores `preload` and
+    // fetches no data until play() is called, so waiting for data would wait forever. play() on a muted inline
+    // video is allowed without a tap. Low Power Mode refuses it; then the first tap anywhere retries once.
     const start = () => {
       cancelPending()
-      const run = () => {
-        onReady = null
-        video.currentTime = 0
-        video.play().catch(() => {})
-      }
-      if (video.readyState >= 2) run()
-      else {
-        onReady = run
-        video.addEventListener('canplay', run, { once: true })
-      }
+      if (video.readyState > 0) video.currentTime = 0
+      video.play().catch(() => {
+        if (!played) return
+        onReady = () => {
+          cancelPending()
+          if (played) video.play().catch(() => {})
+        }
+        video.ownerDocument.addEventListener('touchend', onReady, { once: true, passive: true })
+      })
     }
 
     const loadObserver = new IntersectionObserver(
