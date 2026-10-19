@@ -1,0 +1,101 @@
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--space-32);
+  column-gap: 0;
+  align-items: center;
+  width: 100%;
+  min-height: var(--space-44);
+  padding: 22px var(--xl);
+  border-radius: var(--radius-sm);
+  background: var(--gray-0);
+  box-shadow: var(--proposed-shadow-faq);
+}
+
+.heading {
+  grid-column: 1;
+  grid-row: 1;
+  font: inherit;
+}
+
+.trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gray-900);
+  font: var(--proposed-faq-question);
+  text-align: left;
+  cursor: pointer;
+}
+
+/* the button's hit area is the whole card */
+.trigger::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+}
+
+.trigger:focus-visible {
+  outline: none;
+}
+
+.trigger:focus-visible::after {
+  outline: 2px solid var(--green-600);
+  outline-offset: 2px;
+}
+
+.chevron {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-32);
+  height: var(--space-32);
+  border-radius: var(--rounded-full);
+  background: var(--proposed-gray-100);
+  transition:
+    background-color var(--state-duration) ease,
+    transform var(--state-duration) ease;
+}
+
+.item:hover .chevron {
+  background: var(--green-0);
+}
+
+/* open: the question and the disc sit at the top, the answer takes the row below */
+.open {
+  align-items: start;
+  column-gap: var(--xl);
+}
+
+.open .chevron {
+  grid-row: 1 / span 2;
+  background: var(--green-100);
+  transform: rotate(180deg);
+}
+
+.open:hover .chevron {
+  background: var(--green-100);
+}
+
+.answer {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: var(--md);
+  font: var(--large-r);
+  color: var(--gray-900);
+}
+
+.answer[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

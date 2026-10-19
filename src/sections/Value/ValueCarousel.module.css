@@ -1,0 +1,133 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+/* ---- title strip: only part of it is visible, it slides to keep the current title in view ---- */
+.viewport {
+  width: 100%;
+  overflow: clip;
+}
+
+.strip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: max-content;
+  transition: transform 350ms var(--reveal-ease);
+}
+
+.tab {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gray-400);
+  font: var(--large-r);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--state-duration) ease;
+}
+
+.tab:hover {
+  color: var(--gray-700);
+}
+
+.activeTab,
+.activeTab:hover {
+  color: var(--gray-900);
+  font: var(--large-sb);
+}
+
+/* ---- slides ---- */
+.track {
+  position: relative; /* contains the visually hidden slide headings */
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+
+.slide {
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--xl);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4096 / 3061;
+  height: auto;
+  object-fit: cover;
+  user-select: none;
+}
+
+.text {
+  width: 100%;
+  font: var(--large-r);
+  color: var(--proposed-black);
+  text-align: center;
+}
+
+/* Figma sets the first slide's copy as two paragraphs (a short second line) */
+.line {
+  display: block;
+}
+
+/* pager: dots on a 10px pitch (36 x 6 for four) */
+.dots {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: calc(var(--xl) - var(--space-32));
+}
+
+.dot {
+  position: relative;
+  width: var(--space-6);
+  height: var(--space-6);
+  padding: 0;
+  border: 0;
+  border-radius: var(--rounded-full);
+  background: var(--gray-200);
+  cursor: pointer;
+  transition: background-color var(--state-duration) ease;
+}
+
+/* larger touch target without changing the 10px pitch */
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: -9px -2px;
+}
+
+.active {
+  background: var(--green-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip,
+  .tab,
+  .dot {
+    transition: none;
+  }
+}

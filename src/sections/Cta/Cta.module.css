@@ -1,0 +1,158 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--space-80) var(--space-120);
+  overflow: clip;
+  border-radius: var(--radius-40);
+  background-image: none;
+}
+
+/* the English desktop frame draws the panel 1320 wide, 20px past the page inset on each side;
+   the Vietnamese frame fills the inset */
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-max);
+  padding: 111.39px var(--space-40) var(--space-112);
+  overflow: clip;
+  border-radius: var(--radius-40);
+  background-image: linear-gradient(var(--panel-angle), var(--proposed-bg-from), var(--proposed-bg-to));
+}
+
+.panelWide {
+  width: calc(100% + var(--space-40));
+  max-width: 1320px;
+  padding-inline: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--xl);
+  width: 100%;
+  max-width: 1084px;
+  text-align: center;
+}
+
+.mark {
+  display: block;
+  width: 48px;
+  height: 43px;
+}
+
+.title {
+  padding: 0 66.91px;
+  font: var(--heading-h3);
+  color: var(--gray-900);
+}
+
+/* authored lines (the Vietnamese desktop frame breaks after "để"): each stays whole there and the heading drops
+   its side inset so the longer line stays centred; below the desktop frame the text just flows */
+.titleLines {
+  padding-inline: 0;
+}
+
+.titleLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.text {
+  padding: 0 14.2px;
+  font: var(--large-r);
+  color: var(--gray-700);
+}
+
+/* the support address sits in the copy, in bold, and opens a Gmail compose window */
+.email {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--xl);
+}
+
+/* only the outlined button has a 148px minimum in Figma */
+.actions > :first-child {
+  min-width: 148px;
+}
+
+/* ---- tablet frame (800): the section gives way to the panel ---- */
+@media (max-width: 1279px) {
+  .section {
+    padding: 0 var(--xl) var(--space-80);
+  }
+
+  .panel,
+  .panelWide {
+    width: 100%;
+    max-width: none;
+    padding: var(--space-80) var(--space-20);
+    border-radius: var(--radius-24);
+  }
+
+  .content {
+    max-width: none;
+  }
+
+  .title {
+    padding: 0;
+    font: var(--heading-h5);
+  }
+
+  .titleLine {
+    display: inline;
+    white-space: normal;
+  }
+
+  /* the Vietnamese tablet / mobile frames set the heading at 32/40 rather than 24/32 */
+  .titleLarge {
+    font: var(--heading-h4);
+  }
+
+  .text {
+    padding: 0;
+    font: var(--body-r);
+  }
+}
+
+/* ---- mobile frame (375): the section itself carries the gradient ---- */
+@media (max-width: 767px) {
+  .section {
+    padding: var(--space-64) var(--space-20);
+    border-radius: var(--radius-24);
+    background-image: linear-gradient(var(--panel-angle), var(--proposed-bg-from), var(--proposed-bg-to));
+  }
+
+  .panel,
+  .panelWide {
+    padding: var(--space-64) 0;
+    border-radius: var(--radius-40);
+    background-image: none;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--md);
+    width: 100%;
+  }
+
+  .action,
+  .actions > :first-child {
+    width: 100%;
+  }
+}

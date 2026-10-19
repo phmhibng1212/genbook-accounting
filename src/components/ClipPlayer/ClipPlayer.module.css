@@ -1,0 +1,45 @@
+.frame {
+  position: relative;
+  width: 100%;
+}
+
+.video,
+.canvas,
+.poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* the stacked-alpha clip is only decoded here; the canvas is what shows. It stays in the page (iOS will not
+   decode a video that is display: none) but out of sight, and never offers a player */
+.decoder {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* the static picture holds the place until the first frame is on the canvas */
+.posterGone {
+  visibility: hidden;
+}
+
+/* no native player chrome on any of them (WebKit shows a play button when autoplay is refused) */
+.video::-webkit-media-controls,
+.video::-webkit-media-controls-start-playback-button,
+.video::-webkit-media-controls-overlay-play-button,
+.video::-webkit-media-controls-panel,
+.decoder::-webkit-media-controls,
+.decoder::-webkit-media-controls-start-playback-button,
+.decoder::-webkit-media-controls-overlay-play-button,
+.decoder::-webkit-media-controls-panel {
+  display: none !important;
+  opacity: 0;
+  -webkit-appearance: none;
+}

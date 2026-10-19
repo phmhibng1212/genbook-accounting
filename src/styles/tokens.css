@@ -1,0 +1,171 @@
+/*
+ * Design tokens.
+ *
+ * Section 1 mirrors the variables of the Figma file (BSo47xDdofOAWXTIADvGwI), names unchanged.
+ * Section 2 holds values the design uses but that have NO variable in Figma. They are kept in one
+ * place, prefixed `--proposed-` / `--space-` / `--radius-`, so they can be promoted to real
+ * Figma variables (or changed) without touching any component.
+ * Section 3 is runtime behaviour (motion), not part of the design variables.
+ */
+:root {
+  /* ---------- 1. Figma variables ---------- */
+
+  /* Color */
+  --gray-0: #ffffff;
+  --gray-200: #d9d9d9;
+  --gray-300: #adadad;
+  --gray-400: #8a8a8a;
+  --gray-500: #737373;
+  --gray-700: #383838;
+  --gray-800: #242424;
+  --gray-900: #121212;
+  --green-0: #f5fff5;
+  --green-100: #d8f4d7;
+  --green-500: #22cd1f;
+  --green-600: #1eb71b;
+  --green-900: #123f11;
+  --blue-900: #0c323f;
+
+  /* Typography — Inter. `font` shorthand: weight size/line-height family */
+  --font-inter: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --heading-h2: 600 56px/64px var(--font-inter);
+  --heading-h3: 600 48px/56px var(--font-inter);
+  --heading-h4: 600 32px/40px var(--font-inter);
+  --heading-h5: 600 24px/32px var(--font-inter);
+  --heading-h5-r: 400 24px/32px var(--font-inter);
+  --large-r: 400 18px/28px var(--font-inter);
+  --large-sb: 600 18px/28px var(--font-inter);
+  --body-r: 400 16px/28px var(--font-inter);
+  --body-sb: 600 16px/28px var(--font-inter);
+
+  /* Spacing / radius */
+  --xs: 8px;
+  --sm: 12px;
+  --md: 16px;
+  --xl: 24px;
+  --hacks-to-fit-scale-10: 10px;
+  --radius-sm: 16px; /* "Spacing System/radius-sm" */
+  --rounded-full: 9999px;
+
+  /* Gradients — "Brand gradient" / "Background gradient" are variables in Figma but the API
+     returns no value for them; the stops below are read from the nodes that use them. */
+  --brand-gradient: linear-gradient(to bottom, var(--green-500), var(--proposed-blue-500));
+  /* "Light background": the wash behind the Reporting section, read from the node that uses it */
+  --light-background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.5) 12.482%,
+    rgb(175 252 255 / 0.1) 30.358%,
+    rgb(95 222 88 / 0.1) 67.284%,
+    rgb(255 255 255 / 0.5) 95.069%
+  );
+
+  /* ---------- 2. Used by the design, no Figma variable ---------- */
+
+  /* Color */
+  --proposed-blue-500: #0ebfff; /* end stop of the brand gradient */
+  --proposed-blue-50: #e7f4f9; /* end stop of the background gradient */
+  --proposed-bg-from: rgb(235 255 235); /* "Background gradient" as drawn on the CTA panel and the Enterprise banner */
+  --proposed-bg-to: rgb(222 246 255);
+  --proposed-black: #000000; /* slide copy on the tablet / mobile Value carousel */
+  --proposed-gray-600: #666666; /* "Accounting" label, "/ month", inactive language */
+  --proposed-gray-100: #f1f5f9; /* language toggle track, FAQ chevron disc */
+  --proposed-gray-border: #e8e8e8; /* outline plan cards */
+  --proposed-footer-border: #e5e5e5; /* footer top border, social buttons */
+  --proposed-ink-teal: #021c1c; /* footer background, active language, badge text */
+  --proposed-shadow-header: 0 4px 9.9px rgb(138 232 202 / 0.38);
+  --proposed-shadow-toggle: 0 1px 2px rgb(14 113 113 / 0.18);
+  --proposed-shadow-faq: 0 4px 2px rgb(0 0 0 / 0.05);
+  --proposed-shadow-plan-hover: 0 16px 32px rgb(2 28 28 / 0.12); /* plan cards, hovered */
+
+  /* Hero decoration: the wash behind the copy (angle and stops differ per frame, so the gradient itself is
+     built in Hero.module.css — a var() inside a custom property resolves on :root, not on the element) and
+     the stacked translucent bands */
+  --proposed-hero-wash-white: rgb(255 255 255 / 0.1);
+  --proposed-hero-wash-green: rgb(144 255 142 / 0.1);
+  --proposed-hero-wash-blue: rgb(14 191 255 / 0.1);
+  --proposed-band-from: rgb(191 255 190 / 0.2);
+  --proposed-band-to: rgb(175 252 255 / 0.2);
+
+  /* Type that has no text style. Line heights are the integer values Figma lays out with
+     (its "auto" line height), so blocks keep the design's heights. */
+  --proposed-logo: 600 22px/27px var(--font-inter); /* letter-spacing -1.76px */
+  --proposed-logo-sub: 500 14px/17px var(--font-inter); /* letter-spacing -0.14px */
+  --proposed-toggle: 600 13px/16px var(--font-inter);
+  --proposed-plan-name: 600 22px/27px var(--font-inter); /* letter-spacing -0.44px */
+  --proposed-plan-name-sm: 600 20px/24px var(--font-inter); /* Enterprise; letter-spacing -0.4px */
+  --proposed-price: 600 48px/58px var(--font-inter); /* letter-spacing -1.92px */
+  --proposed-per-month: 400 15px/18px var(--font-inter);
+  --proposed-badge: 600 12px/15px var(--font-inter);
+  --proposed-faq-question: 600 17px/26px var(--font-inter);
+  --proposed-ls-logo: -1.76px;
+  --proposed-ls-logo-sub: -0.14px;
+  --proposed-ls-plan-name: -0.44px;
+  --proposed-ls-plan-name-sm: -0.4px;
+  --proposed-ls-price: -1.92px;
+  --proposed-ls-heading-tight: -1.92px; /* Vietnamese desktop FAQ heading */
+
+  /* Spacing scale (px). Figma only exposes xs / sm / md / xl */
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-4-27: 4.27px; /* Starter price gap — 6px on the other two plans in Figma */
+  --space-5: 5px;
+  --space-6: 6px;
+  --space-10: 10px;
+  --space-13: 13.13px; /* language toggle option inset */
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-28: 28px;
+  --space-29-55: 29.55px; /* pricing intro inset */
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-42: 42px;
+  --space-44: 44px;
+  --space-48: 48px;
+  --space-54: 54px;
+  --space-56: 56px;
+  --space-60: 60px;
+  --space-64: 64px;
+  --space-67: 67px;
+  --space-80: 80px;
+  --space-89: 89px;
+  --space-96: 96px;
+  --space-112: 112px;
+  --space-120: 120px;
+  --space-146: 146px;
+
+  /* Radius scale (px) */
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-40: 40px;
+
+  /* Layout */
+  --container-max: 1728px;
+  --header-height: 92px;
+
+  /* ---------- 3. Motion ---------- */
+  --reveal-distance: 24px;
+  --reveal-duration: 700ms;
+  --reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --reveal-image-scale: 1.05;
+  --stagger-step: 100ms;
+  --state-duration: 160ms;
+  --lift-distance: 8px; /* plan cards float up on hover */
+  --lift-duration: 250ms;
+}
+
+/* Tablet frame (800) */
+@media (max-width: 1279px) {
+  :root {
+    --header-height: 88px;
+  }
+}
+
+/* Mobile frame (375): shorter reveal travel */
+@media (max-width: 767px) {
+  :root {
+    --reveal-distance: 12px;
+  }
+}

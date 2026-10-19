@@ -1,0 +1,32 @@
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-40);
+  height: var(--space-40);
+  border: 1px solid var(--proposed-footer-border);
+  border-radius: var(--radius-10);
+  background: var(--gray-0);
+  transition:
+    background-color var(--state-duration) ease,
+    transform var(--state-duration) ease;
+}
+
+.link:hover {
+  background: var(--green-0);
+  transform: translateY(-2px);
+}
+
+.link:active {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+
+  .link:hover {
+    transform: none;
+  }
+}

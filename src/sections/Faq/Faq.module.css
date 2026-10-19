@@ -1,0 +1,91 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-80);
+  overflow: clip;
+  border-radius: var(--radius-40);
+}
+
+/* the design draws this block 1320 wide inside an 80px page inset, i.e. 20px past it on each side */
+.inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-40);
+  width: calc(100% + var(--space-40));
+  max-width: 1320px;
+  padding: var(--space-80) var(--space-40);
+  border-radius: var(--radius-24);
+}
+
+.head {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--md);
+  max-width: 800px;
+  min-width: 1px;
+}
+
+.title {
+  font: var(--heading-h3);
+  color: var(--gray-900);
+}
+
+.tight {
+  letter-spacing: var(--proposed-ls-heading-tight);
+}
+
+.text {
+  font: var(--large-r);
+  color: var(--gray-900);
+}
+
+.list {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--sm);
+  min-width: 1px;
+}
+
+/* ---- tablet frame (800) ---- */
+@media (max-width: 1279px) {
+  .section {
+    padding: var(--space-80) var(--space-64);
+  }
+
+  .inner {
+    flex-direction: column;
+    gap: var(--space-40);
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .head {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .title {
+    font: var(--heading-h4);
+  }
+
+  /* the tablet / mobile Vietnamese headings are not tightened */
+  .tight {
+    letter-spacing: normal;
+  }
+
+  .list {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .section {
+    padding: var(--space-64) var(--space-20);
+  }
+}

@@ -1,0 +1,90 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--row-gap);
+  width: 100%;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.copy {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--md);
+  max-width: 554px;
+  min-width: 1px;
+}
+
+.fixed {
+  flex: 0 0 554px;
+  width: 554px;
+}
+
+.title {
+  font: var(--heading-h4);
+  color: var(--gray-900);
+}
+
+.text {
+  font: var(--large-r);
+  color: var(--gray-700);
+}
+
+/* desktop keeps the line breaks authored in Figma */
+.line,
+.titleLine {
+  display: block;
+}
+
+.mobileBreak {
+  display: none;
+}
+
+.media {
+  flex: 1 0 0;
+  min-width: 1px;
+}
+
+/* ---- tablet + mobile: copy above visual, whichever side the visual sits on at desktop ---- */
+@media (max-width: 1279px) {
+  .row,
+  .reverse {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .copy {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  .fixed {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .line,
+  .titleLine {
+    display: inline;
+  }
+
+  .media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
+/* the mobile frame breaks the heading by hand again */
+@media (max-width: 767px) {
+  .titleLine {
+    display: block;
+  }
+
+  .mobileBreak {
+    display: inline;
+  }
+}

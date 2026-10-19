@@ -1,0 +1,198 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-40) var(--space-80);
+  overflow: clip;
+  border-radius: 0 0 var(--radius-40) var(--radius-40);
+  background: var(--gray-0);
+}
+
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max);
+  padding: var(--space-80) 0;
+  overflow: clip;
+  border-radius: var(--radius-20);
+  /* angle and stops come from heroBands.js, per frame */
+  background-image: linear-gradient(
+    var(--hero-wash-angle),
+    var(--proposed-hero-wash-white) var(--hero-wash-a),
+    var(--proposed-hero-wash-green) var(--hero-wash-b),
+    var(--proposed-hero-wash-blue) var(--hero-wash-c)
+  );
+}
+
+/* ---- decorative bands ---- */
+.bands {
+  position: absolute;
+  pointer-events: none;
+}
+
+.band {
+  position: absolute;
+}
+
+.bands-mobile {
+  bottom: -69.15px;
+  left: calc(50% - 3.75px);
+  transform: translateX(-50%);
+}
+
+/* ---- copy ---- */
+.copy {
+  position: relative;
+  display: flex;
+  flex: 0 0 540px;
+  flex-direction: column;
+  gap: var(--space-40);
+  width: 540px;
+  min-width: 540px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xl);
+  max-width: 800px;
+  min-height: 224px;
+  color: var(--gray-800);
+}
+
+.heading {
+  font: var(--heading-h2);
+}
+
+/* desktop and mobile set the headline on two lines; tablet keeps it on one */
+.line {
+  display: block;
+}
+
+.text {
+  font: var(--heading-h5-r);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--md);
+}
+
+.action {
+  width: 171px;
+  min-width: 171px;
+}
+
+/* Vietnamese labels are longer than the 171px the English buttons are drawn at */
+.fitActions .action {
+  width: auto;
+}
+
+/* ---- image ---- */
+/* desktop: the column keeps an 80px inset on its left, so the artwork stays clear of the copy at any width */
+.media {
+  position: relative;
+  flex: 1 0 0;
+  max-width: 800px;
+  min-width: 1px;
+  padding-left: var(--space-80);
+}
+
+/* ---- tablet frame (800) ---- */
+@media (max-width: 1279px) {
+  .hero {
+    padding: var(--space-80) var(--space-64);
+  }
+
+  .wrap {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-40);
+    padding: var(--space-60) 0;
+  }
+
+  .copy {
+    flex: 0 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content {
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .heading {
+    font: var(--heading-h4);
+  }
+
+  .line {
+    display: inline;
+  }
+
+  /* the Vietnamese tablet frame keeps the two authored lines */
+  .stacked .line {
+    display: block;
+  }
+
+  .text {
+    font: var(--large-r);
+  }
+
+  /* two equal columns, like the two "fill" buttons in the Figma tablet frame */
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .action {
+    width: auto;
+    min-width: 0;
+  }
+
+  .media {
+    flex: 0 0 auto;
+    width: 100%;
+    padding-left: 0;
+    /* the frames cap the artwork at 577.55px tall */
+    max-height: 577.551px;
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .hero {
+    padding: var(--space-40) 0 0;
+  }
+
+  .wrap {
+    gap: var(--space-67);
+    padding: 0 var(--space-20) var(--space-80);
+    border-radius: var(--radius-sm);
+  }
+
+  .copy {
+    gap: var(--xl);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .action {
+    width: 100%;
+  }
+}

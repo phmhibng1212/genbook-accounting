@@ -1,0 +1,27 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+.title {
+  font: var(--large-sb);
+  color: var(--gray-0);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+
+.link {
+  display: block;
+  font: var(--body-r);
+  color: var(--gray-0);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

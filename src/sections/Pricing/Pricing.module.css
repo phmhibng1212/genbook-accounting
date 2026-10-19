@@ -1,0 +1,192 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-120) var(--space-80) var(--space-80);
+  border-radius: var(--radius-40);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-56);
+  width: 100%;
+  max-width: 1200px;
+  padding-top: var(--xl);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--md);
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.title {
+  font: var(--heading-h3);
+  color: var(--gray-900);
+  white-space: nowrap;
+}
+
+.wrapTitle {
+  white-space: normal;
+}
+
+.text {
+  padding: 0 var(--space-29-55);
+  font: var(--heading-h5-r);
+  color: var(--gray-900);
+}
+
+.textLine {
+  display: block;
+}
+
+/* ---- Enterprise banner ---- */
+.enterprise {
+  --banner-from: var(--proposed-bg-from);
+  --banner-to: var(--proposed-bg-to);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-20) 0;
+  width: 100%;
+  /* Figma draws this outline inside the 142px frame, so the padding gives the border back */
+  padding: var(--space-28) calc(var(--space-32) - 1px) calc(var(--space-28) - 1px);
+  border-radius: var(--radius-20);
+  background-image: linear-gradient(var(--banner-angle), var(--banner-from), var(--banner-to));
+}
+
+.enterpriseCopy {
+  display: flex;
+  flex: 0 0 620px;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 620px;
+  min-width: 620px;
+}
+
+.enterpriseName {
+  font: var(--proposed-plan-name-sm);
+  letter-spacing: var(--proposed-ls-plan-name-sm);
+  color: var(--gray-900);
+}
+
+.enterpriseText {
+  font: var(--large-r);
+  color: var(--gray-700);
+  white-space: nowrap;
+}
+
+.enterpriseLine {
+  display: block;
+}
+
+.enterpriseCta {
+  flex: 0 0 auto;
+  width: 148px;
+  min-width: 148px;
+}
+
+/* a longer (Vietnamese) label sizes the button; the design draws it 184px wide */
+.enterpriseCta.fitCta {
+  width: auto;
+}
+
+/* ---- plans ---- */
+.plans {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-20);
+  width: 100%;
+}
+
+/* ---- tablet frame (800) ---- */
+@media (max-width: 1279px) {
+  .section {
+    padding: var(--space-80) var(--space-64) var(--space-32);
+  }
+
+  .container {
+    max-width: none;
+  }
+
+  .title {
+    font: var(--heading-h4);
+    white-space: normal;
+  }
+
+  .text {
+    font: var(--body-r);
+  }
+
+  /* the English tablet / mobile banner is the pale pair at 80%; the Vietnamese frames keep the desktop colours */
+  .enterprise:not(.solid) {
+    --banner-from: color-mix(in srgb, var(--green-0) 80%, transparent);
+    --banner-to: color-mix(in srgb, var(--proposed-blue-50) 80%, transparent);
+  }
+
+  .enterprise {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: var(--xl);
+    padding: var(--space-28) var(--md);
+  }
+
+  .enterpriseCopy {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .enterpriseText {
+    white-space: normal;
+  }
+
+  .enterpriseLine {
+    display: inline;
+  }
+
+  .plans {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plans > * {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100%;
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .wideBreak {
+    display: none;
+  }
+
+  .section {
+    padding: var(--space-64) var(--space-20) var(--space-32);
+  }
+
+  /* the mobile frame sets the intro full width, as one paragraph rather than the two authored lines */
+  .text {
+    padding: 0;
+  }
+
+  .textLine {
+    display: inline;
+  }
+
+  .enterpriseCta,
+  .enterpriseCta.fitCta {
+    width: 100%;
+  }
+}

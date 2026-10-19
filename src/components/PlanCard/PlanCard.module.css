@@ -1,0 +1,194 @@
+.card {
+  --card-stroke: var(--proposed-gray-border);
+  --card-ring: inset 0 0 0 1px var(--card-stroke);
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: var(--xl);
+  min-width: 1px;
+  padding: var(--space-32) var(--space-28);
+  background: var(--gray-0);
+  color: var(--gray-700);
+}
+
+/* the cards float up on hover: `translate` is separate from the `transform` the scroll reveal drives,
+   and its transition is declared with the reveal's own selector so it is not overridden by it */
+:global(.js) .card[data-reveal][data-revealed] {
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease) var(--reveal-delay, 0ms),
+    transform var(--reveal-duration) var(--reveal-ease) var(--reveal-delay, 0ms),
+    translate var(--lift-duration) var(--reveal-ease),
+    box-shadow var(--lift-duration) var(--reveal-ease),
+    border-color var(--lift-duration) var(--reveal-ease);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    translate: 0 calc(-1 * var(--lift-distance));
+    box-shadow:
+      var(--card-ring),
+      var(--proposed-shadow-plan-hover);
+  }
+}
+
+/* desktop: the outline turns green as the card lifts */
+@media (min-width: 1280px) and (hover: hover) {
+  .card:hover {
+    --card-stroke: var(--green-600);
+  }
+}
+
+/* Starter and Scale carry a real 1px border (it takes room from the padding, as laid out in Figma); Growth's
+   outline is drawn over its padding, so it is a ring */
+.outline {
+  --card-ring: 0 0 0 0 transparent; /* its border is real */
+  align-self: stretch;
+  border: 1px solid var(--card-stroke);
+  border-radius: var(--radius-20);
+}
+
+.popular {
+  border-radius: var(--radius-24);
+  box-shadow: var(--card-ring);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font: var(--proposed-plan-name);
+  letter-spacing: var(--proposed-ls-plan-name);
+  color: var(--gray-900);
+}
+
+.popular .name {
+  color: var(--gray-800);
+}
+
+.badge {
+  padding: var(--space-5) var(--sm);
+  border-radius: var(--rounded-full);
+  background: var(--green-600);
+  color: var(--green-0);
+  font: var(--proposed-badge);
+  white-space: nowrap;
+}
+
+.whiteBadge {
+  color: var(--gray-0);
+}
+
+.description {
+  font: var(--large-r);
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--price-gap);
+  white-space: nowrap;
+}
+
+.amount {
+  font: var(--proposed-price);
+  letter-spacing: var(--proposed-ls-price);
+  color: var(--gray-900);
+}
+
+.popular .amount {
+  color: var(--gray-800);
+}
+
+.period {
+  font: var(--proposed-per-month);
+  color: var(--proposed-gray-600);
+}
+
+.yearly {
+  font: var(--body-r);
+}
+
+.popular .yearly,
+.yearlyStrong {
+  color: var(--gray-800);
+}
+
+/* Vietnamese frames: the popular card's name and price are gray-900 like its neighbours */
+.strongInk .name,
+.strongInk .amount {
+  color: var(--gray-900);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+
+.popular .list {
+  padding-bottom: var(--space-2);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-10);
+}
+
+.check {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  width: 18px;
+  height: var(--space-20);
+  padding-top: var(--space-2);
+}
+
+.itemText {
+  font: var(--large-r);
+}
+
+.popular .itemText {
+  color: var(--gray-800);
+}
+
+.nowrap .itemText {
+  white-space: nowrap;
+}
+
+@media (min-width: 1280px) {
+  .nowrapDesktop .itemText {
+    white-space: nowrap;
+  }
+}
+
+/* desktop: the lists absorb the height difference so every button lands on one line */
+@media (min-width: 1280px) {
+  .outline .list {
+    flex: 1 0 0;
+    min-height: 1px;
+    overflow: clip;
+  }
+}
+
+/* reduced motion: the card still lifts on hover (the effect asked for), but at once rather than gliding */
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .card[data-reveal][data-revealed] {
+    transition: opacity 500ms ease-out var(--reveal-delay, 0ms);
+  }
+}

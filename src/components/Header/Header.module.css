@@ -1,0 +1,155 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--space-80);
+  background: var(--gray-0);
+  transition: box-shadow var(--state-duration) ease;
+}
+
+/* desktop: flat until the page scrolls */
+.scrolled {
+  box-shadow: var(--proposed-shadow-header);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-48);
+  width: 100%;
+  max-width: var(--container-max);
+  padding: var(--xl) 0;
+}
+
+/* Vietnamese labels are longer. Figma: 20px between the three columns, the menu centred on the page (the logo
+   and the actions are equal-width columns). A grid keeps that, and lets a side column grow past its share
+   when its content is wider. The gap between menu buttons is 0 at 1372px, the narrowest the menu can still be
+   centred, and opens up to the designed 8px by 1420px. */
+.compact {
+  --compact-nav-from: 1372px;
+}
+
+.compact .container {
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  gap: var(--space-20);
+}
+
+.compact .nav {
+  gap: clamp(0px, calc((100vw - var(--compact-nav-from)) / 6), var(--xs));
+}
+
+.brand {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 1px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--xs);
+}
+
+.actions {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--md);
+  min-width: 1px;
+}
+
+/* ---- menu (tablet / mobile only) ---- */
+.menu {
+  position: relative;
+  display: none;
+  width: var(--space-40);
+  height: var(--space-40);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-40);
+  height: var(--space-40);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-8);
+  background: none;
+  cursor: pointer;
+  transition: background-color var(--state-duration) ease;
+}
+
+.toggle:hover {
+  background: var(--green-0);
+}
+
+.panel {
+  position: absolute;
+  top: var(--space-48);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-42);
+  width: 267px;
+  padding: var(--xl);
+  border-radius: var(--radius-8);
+  background: var(--gray-0);
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.panelNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+  width: 100%;
+}
+
+/* ---- tablet frame (800) ---- */
+@media (max-width: 1279px) {
+  .compact .container {
+    display: flex;
+    gap: var(--space-20);
+  }
+
+  .header {
+    padding: 0 var(--space-64);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    box-shadow: var(--proposed-shadow-header);
+  }
+
+  .nav,
+  .header .desktopOnly {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .header {
+    padding: 0 var(--space-20);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .toggle {
+    transition: none;
+  }
+}

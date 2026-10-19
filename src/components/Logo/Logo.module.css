@@ -1,0 +1,47 @@
+.logo {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--xs);
+  width: max-content; /* never squeezed by a narrow column; Figma lets it overflow instead */
+  text-decoration: none;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.mark {
+  width: 30px;
+  height: 27px;
+}
+
+.name {
+  font: var(--proposed-logo);
+  letter-spacing: var(--proposed-ls-logo);
+  white-space: nowrap;
+}
+
+.product {
+  font: var(--proposed-logo-sub);
+  letter-spacing: var(--proposed-ls-logo-sub);
+  white-space: nowrap;
+}
+
+.light .name {
+  color: var(--gray-900);
+}
+
+.light .product {
+  color: var(--proposed-gray-600);
+}
+
+.dark .name {
+  color: var(--gray-0);
+}
+
+.dark .product {
+  color: var(--gray-200);
+}

@@ -1,0 +1,121 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sm);
+  min-height: var(--space-40);
+  overflow: clip;
+  font: var(--body-sb);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  transition:
+    background-color var(--state-duration) ease,
+    color var(--state-duration) ease,
+    filter var(--state-duration) ease,
+    transform var(--state-duration) ease;
+}
+
+.label {
+  display: block;
+  white-space: nowrap;
+}
+
+/* ---- size: height ---- */
+.sm {
+  height: var(--space-40);
+}
+
+.md {
+  height: var(--space-44);
+}
+
+.lg {
+  height: var(--space-48);
+}
+
+.xl {
+  height: var(--space-54);
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+/* ---- ghost: nav item (text sits in an 8px inset inside 16px padding) ---- */
+.ghost {
+  padding: var(--sm) var(--md);
+  border-radius: var(--radius-sm);
+  color: var(--gray-700);
+}
+
+.ghost .label {
+  padding: 0 var(--xs);
+}
+
+.ghost:hover {
+  background: var(--green-0);
+}
+
+.ghost:active {
+  background: var(--green-0);
+  filter: brightness(0.96);
+}
+
+/* ---- primary ---- */
+.primary {
+  padding: var(--hacks-to-fit-scale-10) var(--md);
+  border-radius: var(--rounded-full);
+  background: var(--green-600);
+  color: var(--gray-0);
+}
+
+.primary:hover {
+  filter: brightness(0.92);
+}
+
+.primary:active {
+  filter: brightness(0.84);
+  transform: translateY(1px);
+}
+
+/* ---- secondary: outlined pill ---- */
+.secondary {
+  padding: var(--hacks-to-fit-scale-10) var(--xl) var(--hacks-to-fit-scale-10) var(--space-20);
+  border-radius: var(--rounded-full);
+  border: 1.5px solid currentColor;
+}
+
+.secondary {
+  color: var(--gray-800);
+}
+
+.secondary:hover {
+  background: var(--gray-800);
+  color: var(--gray-0);
+}
+
+.secondary:active {
+  background: var(--gray-900);
+  color: var(--gray-0);
+  transform: translateY(1px);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .button:active {
+    transform: none;
+  }
+}

@@ -1,0 +1,161 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-64) var(--space-80) var(--space-40);
+  border-top: 1px solid var(--proposed-footer-border);
+  background: var(--proposed-ink-teal);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  width: 100%;
+  max-width: 1280px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--md);
+  width: 400px;
+  max-width: 400px;
+}
+
+.description {
+  font: var(--body-r);
+  color: var(--gray-200);
+}
+
+/* desktop: the three columns sit in the same justify-between row as the brand block */
+.columns {
+  display: contents;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+  width: 307px;
+  max-width: 307px;
+}
+
+/* Figma fixes these four blocks at 176px tall (a longer list overflows into the gap below) */
+.brand,
+.contact,
+.products,
+.legal {
+  height: 176px;
+}
+
+.contactTitle {
+  font: var(--large-sb);
+  color: var(--green-0);
+}
+
+.contactText {
+  font: var(--body-r);
+  color: var(--gray-300);
+}
+
+.contactLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* the English frame sets the address as plain copy: it reads the same, and underlines on hover */
+.contactLinkPlain {
+  text-decoration: none;
+}
+
+.contactLinkPlain:hover {
+  text-decoration: underline;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--md);
+}
+
+.products {
+  width: 125px;
+}
+
+.legal {
+  width: 144.51px;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: var(--space-40);
+}
+
+.copyright {
+  font: var(--body-r);
+  color: var(--gray-500);
+}
+
+/* ---- tablet frame (800) ---- */
+@media (max-width: 1279px) {
+  .footer {
+    padding: var(--space-64) var(--space-64) var(--space-40);
+  }
+
+  .container {
+    gap: var(--space-42);
+  }
+
+  .top {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: var(--space-42);
+  }
+
+  .brand {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .columns {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-48);
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .footer {
+    padding: var(--space-64) var(--space-20);
+  }
+
+  .top {
+    gap: var(--xl);
+  }
+
+  .columns {
+    flex-direction: column;
+    gap: var(--xl);
+  }
+
+  .contact,
+  .products,
+  .legal {
+    height: auto;
+  }
+}
