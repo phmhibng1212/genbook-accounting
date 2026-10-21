@@ -1,6 +1,7 @@
 // Prepares the Safari / iOS version and the still picture of every animation clip in src/assets/media:
 //   node scripts/encode-clips.mjs            (every <slot>.<lang>.webm without both outputs)
 //   node scripts/encode-clips.mjs --force    (redo all)
+// Optional environment: CLIP_DIR (folder), CLIP_MAX_WIDTH (px), STACK_CRF (H.264 quality), FFMPEG.
 // Needs `ffmpeg` on the PATH (or FFMPEG=/path/to/ffmpeg) built with libvpx (the decoder that keeps the alpha), libx264 and libwebp.
 //
 // For each `<slot>.<lang>.webm` it writes
@@ -16,9 +17,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const FFMPEG = process.env.FFMPEG || 'ffmpeg'
-const DIR = 'src/assets/media'
+const DIR = process.env.CLIP_DIR || 'src/assets/media'
 const FPS = 24
-const MAX_WIDTH = 1456 // the hero is shown at most ~800px wide, so 1456 covers a 2x screen; a smaller clip keeps its size
+const MAX_WIDTH = Number(process.env.CLIP_MAX_WIDTH) || 1456 // the hero is shown at most ~800px wide, so 1456 covers a 2x screen; a smaller clip keeps its size
 const force = process.argv.includes('--force')
 
 const run = (args) => execFileSync(FFMPEG, ['-v', 'error', '-y', ...args], { stdio: ['ignore', 'inherit', 'inherit'] })
@@ -39,7 +40,7 @@ async function encode(webm) {
   const height = Math.round((width * srcH) / srcW / 2) * 2
 
   // still: the last frame, with its transparency
-  run(['-c:v', 'libvpx-vp9', '-sseof', '-0.08', '-i', webm, '-frames:v', '1', '-vf', `scale=${width}:${height}:flags=lanczos`, '-pix_fmt', 'rgba', '-c:v', 'libwebp', '-quality', '88', '-compression_level', '6', `${base}.poster.webp`])
+  run(['-c:v', 'libvpx-vp9', '-sseof', '-0.08', '-i', webm, '-frames:v', '1', '-vf', `scale=${width}:${height}:flags=lanczos`, '-pix_fmt', 'rgba', '-c:v', 'libwebp', '-quality', process.env.POSTER_QUALITY || '88', '-compression_level', '6', `${base}.poster.webp`])
 
   const output = `${base}.stack.mp4`
   const decoder = spawn(
@@ -53,7 +54,7 @@ async function encode(webm) {
       '-y', '-v', 'error',
       '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', `${width * 2}x${height}`, '-r', String(FPS), '-i', '-',
       '-vf', 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p',
-      '-c:v', 'libx264', '-profile:v', 'high', '-level', '5.1', '-crf', '21', '-preset', 'slow',
+      '-c:v', 'libx264', '-profile:v', 'high', '-level', '5.1', '-crf', process.env.STACK_CRF || '21', '-preset', 'slow',
       '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
       '-movflags', '+faststart', '-an', output,
     ],
