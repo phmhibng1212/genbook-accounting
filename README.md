@@ -1,5 +1,7 @@
 # Genbook Accounting — landing page
 
+Handing over? Start with [HANDOFF.md](./HANDOFF.md) (to-do list for the developer, known differences from the design).
+
 Implementation of the Figma file `Accounting-Genbook` (`BSo47xDdofOAWXTIADvGwI`), section **EN** `194:51227` and section
 **VI** `194:51228`: Desktop (1280) · Tablet (800) · Mobile (375), the six FAQ answers, the menu panel and the
 "Schedule a demo" modal. React 19 + Vite, CSS Modules, no UI framework, no animation library.
