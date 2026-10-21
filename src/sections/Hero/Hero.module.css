@@ -127,11 +127,6 @@
     font: var(--heading-h4);
   }
 
-  /* the English tablet / mobile frames keep the 24px intro (pending confirmation) */
-  .textLarge {
-    font: var(--heading-h5-r);
-  }
-
   .actions {
     flex-wrap: wrap;
     justify-content: center;

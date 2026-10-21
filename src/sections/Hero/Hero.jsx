@@ -70,11 +70,7 @@ export default function Hero() {
             <h1 className={styles.heading} data-reveal>
               <FramedText text={hero.heading} breaks={hero.headingBreaks} />
             </h1>
-            <p
-              className={`${styles.text} ${hero.largeIntroBelowDesktop ? styles.textLarge : ''}`}
-              data-reveal
-              data-reveal-delay="100"
-            >
+            <p className={styles.text} data-reveal data-reveal-delay="100">
               {hero.text}
             </p>
           </div>

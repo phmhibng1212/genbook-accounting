@@ -49,7 +49,7 @@
 .text {
   width: 100%;
   padding: 0 3.05px;
-  font: var(--heading-h5-r);
+  font: var(--large-r);
   color: var(--gray-800);
 }
 
@@ -85,6 +85,10 @@
 
   .titleLine {
     white-space: normal;
+  }
+
+  .text {
+    font: var(--heading-h5-r);
   }
 
   .textLine {

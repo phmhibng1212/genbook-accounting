@@ -36,7 +36,6 @@ export default {
   hero: {
     heading: 'Tự động hoá kế toán Thương mại điện tử',
     headingBreaks: null,
-    largeIntroBelowDesktop: false,
     text: 'Genbook kết nối dữ liệu đa nền tảng và tự động ghi nhận bút toán và đối soát giao dịch theo từng đơn hàng.',
     primary: { label: 'Dùng thử miễn phí' },
     secondary: { label: 'Đặt lịch trải nghiệm sản phẩm' },
