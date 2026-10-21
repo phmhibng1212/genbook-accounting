@@ -62,12 +62,12 @@
 }
 
 .cardTitle {
-  font: var(--heading-h5);
+  font: var(--large-sb);
   color: var(--gray-900);
 }
 
 .cardText {
-  font: var(--large-r);
+  font: var(--body-r);
   color: var(--gray-900);
 }
 

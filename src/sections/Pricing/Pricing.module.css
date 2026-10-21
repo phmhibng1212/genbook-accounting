@@ -78,7 +78,7 @@
 }
 
 .enterpriseText {
-  font: var(--large-r);
+  font: var(--body-r);
   color: var(--gray-700);
   white-space: nowrap;
 }

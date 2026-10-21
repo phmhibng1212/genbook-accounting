@@ -88,7 +88,7 @@
 }
 
 .description {
-  font: var(--large-r);
+  font: var(--body-r);
 }
 
 .priceBlock {
@@ -160,7 +160,7 @@
 }
 
 .itemText {
-  font: var(--large-r);
+  font: var(--body-r);
 }
 
 .popular .itemText {

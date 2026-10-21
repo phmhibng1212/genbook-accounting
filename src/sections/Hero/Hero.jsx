@@ -1,5 +1,6 @@
 import Button from '../../components/Button/Button'
 import { useContactModal } from '../../components/ContactModal/ContactModalContext'
+import FramedText from '../../components/FrameBreak/FrameBreak'
 import ClipPlayer from '../../components/ClipPlayer/ClipPlayer'
 import MediaSlot from '../../components/MediaSlot/MediaSlot'
 import { clipFor, mediaFor } from '../../data/media'
@@ -67,9 +68,13 @@ export default function Hero() {
         <div className={styles.copy}>
           <div className={styles.content}>
             <h1 className={styles.heading} data-reveal>
-              {hero.heading}
+              <FramedText text={hero.heading} breaks={hero.headingBreaks} />
             </h1>
-            <p className={styles.text} data-reveal data-reveal-delay="100">
+            <p
+              className={`${styles.text} ${hero.largeIntroBelowDesktop ? styles.textLarge : ''}`}
+              data-reveal
+              data-reveal-delay="100"
+            >
               {hero.text}
             </p>
           </div>

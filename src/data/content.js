@@ -38,6 +38,10 @@ export const a11y = {
 
 export const hero = {
   heading: 'Automated Accounting for E-commerce',
+  // the Desktop frame breaks the heading after "Accounting"; tablet and mobile let it flow
+  headingBreaks: [{ after: 'Automated Accounting', frames: ['desktop'] }],
+  // the English Tablet / Mobile frames' intro stays at 24px for now (Desktop and every Vietnamese frame: 18px)
+  largeIntroBelowDesktop: true,
   text: 'Genbook connects data across platforms, automates journal entries, and reconciles individual orders.',
   primary: { label: 'Start free trial', href: links.signIn },
   // opens the contact modal
