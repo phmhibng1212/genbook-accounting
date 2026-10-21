@@ -45,7 +45,8 @@ export default {
   steps: {
     heading: [
       { text: '3 bước đơn giản', gradient: true, breakAfter: null },
-      { text: ' để có sổ sách kế toán chính xác', gradient: false },
+      { text: ' để có sổ sách', gradient: false, breakAfter: ['desktop'] },
+      { text: ' kế toán chính xác', gradient: false },
     ],
     items: [
       {
@@ -196,7 +197,7 @@ export default {
     tightHeading: true,
     heading: [
       { text: 'Những ', gradient: false },
-      { text: 'câu hỏi', gradient: true },
+      { text: 'câu hỏi', gradient: true, breakAfter: ['desktop'] },
       { text: ' thường gặp', gradient: false },
     ],
     text: 'Giải đáp những thắc mắc phổ biến về nền tảng và dịch vụ của chúng tôi.',

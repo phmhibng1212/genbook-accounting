@@ -1,4 +1,5 @@
-import { useId, useState } from 'react'
+import { Fragment, useId, useState } from 'react'
+import { FrameBreak } from '../../components/FrameBreak/FrameBreak'
 import FaqItem from '../../components/FaqItem/FaqItem'
 import { useContent } from '../../i18n/LanguageContext'
 import styles from './Faq.module.css'
@@ -15,9 +16,10 @@ export default function Faq() {
         <div className={styles.head}>
           <h2 className={`${styles.title} ${faq.tightHeading ? styles.tight : ''} gradient-block`} id="faqs-title" data-reveal>
             {faq.heading.map((part) => (
-              <span key={part.text} className={part.gradient ? undefined : 'solid'}>
-                {part.text}
-              </span>
+              <Fragment key={part.text}>
+                <span className={part.gradient ? undefined : 'solid'}>{part.text}</span>
+                {part.breakAfter && <FrameBreak frames={part.breakAfter} />}
+              </Fragment>
             ))}
           </h2>
           <p className={styles.text} data-reveal data-reveal-delay="100">
