@@ -1,0 +1,263 @@
+/* ---- backdrop ---- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--xl);
+  background: var(--proposed-overlay);
+  opacity: 0;
+  overscroll-behavior: contain;
+  transition: opacity var(--modal-duration) ease;
+}
+
+.shown {
+  opacity: 1;
+}
+
+/* ---- card (desktop + tablet: 683 wide, centred) ---- */
+.panel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 683px;
+  max-height: 100%;
+  border-radius: var(--radius-24);
+  background: var(--gray-0);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  transform: translate3d(0, 12px, 0) scale(0.98);
+  transition:
+    opacity var(--modal-duration) ease,
+    transform var(--modal-duration) var(--modal-ease);
+}
+
+.panel:focus {
+  outline: none;
+}
+
+.shown .panel {
+  opacity: 1;
+  transform: none;
+}
+
+/* the form scrolls inside the card when the window is too short; the close button stays put */
+.scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-48);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: inherit;
+  -webkit-overflow-scrolling: touch;
+}
+
+.close {
+  position: absolute;
+  top: var(--xl);
+  right: var(--xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-40);
+  height: var(--space-40);
+  padding: 0;
+  border: 0;
+  border-radius: var(--rounded-full);
+  background: none;
+  color: var(--proposed-on-surface);
+  cursor: pointer;
+  transition: background-color var(--state-duration) ease;
+}
+
+.close:hover {
+  background: var(--proposed-gray-100);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--green-600);
+  outline-offset: 2px;
+}
+
+/* ---- content ---- */
+/* title -> fields is 48px, fields -> button 24px */
+.form,
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--xl);
+}
+
+.title {
+  align-self: stretch;
+  margin-bottom: var(--xl);
+  font: var(--heading-h3);
+  color: var(--gray-900);
+}
+
+.title:focus {
+  outline: none;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xl);
+  align-self: stretch;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.input,
+.textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--proposed-input-border);
+  border-radius: var(--radius-8);
+  background: var(--gray-0);
+  color: var(--gray-900);
+  font: var(--proposed-body-sm);
+  transition:
+    border-color var(--state-duration) ease,
+    box-shadow var(--state-duration) ease;
+}
+
+.input {
+  height: var(--space-40);
+  padding: 0 var(--sm);
+}
+
+.textarea {
+  min-height: 96px;
+  max-height: 240px;
+  padding: var(--sm) var(--md);
+  resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--proposed-placeholder);
+  opacity: 1;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: var(--gray-300);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgb(30 183 27 / 0.18);
+}
+
+.invalid,
+.invalid:hover {
+  border-color: var(--proposed-error);
+}
+
+.invalid:focus {
+  border-color: var(--proposed-error);
+  box-shadow: 0 0 0 3px rgb(217 45 32 / 0.16);
+}
+
+.error,
+.failure {
+  font: var(--proposed-caption);
+  color: var(--proposed-error);
+}
+
+.failure {
+  align-self: stretch;
+}
+
+.doneText {
+  align-self: stretch;
+  margin-top: calc(var(--xl) * -1);
+  font: var(--large-r);
+  color: var(--gray-800);
+}
+
+.titleBreak {
+  display: inline;
+}
+
+/* ---- tablet frame (800): same card, 32px title on one line ---- */
+@media (max-width: 1279px) {
+  .title {
+    font: var(--heading-h4);
+  }
+
+  .titleBreak {
+    display: none;
+  }
+}
+
+/* ---- mobile frame (375): a sheet from the bottom edge, 20px in from each side ---- */
+@media (max-width: 767px) {
+  .overlay {
+    align-items: flex-end;
+    padding: 0 var(--space-20);
+  }
+
+  .panel {
+    max-height: calc(100% - var(--md));
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    box-shadow: none;
+    opacity: 1;
+    transform: translate3d(0, 100%, 0);
+    transition: transform calc(var(--modal-duration) + 60ms) var(--modal-ease);
+  }
+
+  .shown .panel {
+    transform: none;
+  }
+
+  .scroll {
+    padding: var(--space-40) var(--xl) calc(var(--space-40) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .close {
+    top: var(--md);
+    right: var(--md);
+  }
+
+  .title {
+    font: var(--heading-h4);
+  }
+
+  .titleBreak {
+    display: inline;
+  }
+
+  .fields {
+    gap: var(--md);
+  }
+
+  /* 16px keeps iOS Safari from zooming the page when a field is focused */
+  .input,
+  .textarea {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    opacity: 0;
+    transform: none;
+    transition: opacity var(--modal-duration) ease;
+  }
+
+  .shown .panel {
+    opacity: 1;
+    transform: none;
+  }
+}

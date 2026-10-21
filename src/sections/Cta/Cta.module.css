@@ -156,3 +156,10 @@
     width: 100%;
   }
 }
+
+/* narrower than the 375 frame (320px phones): the authored lines may wrap */
+@media (max-width: 359px) {
+  .titleLine {
+    white-space: normal;
+  }
+}

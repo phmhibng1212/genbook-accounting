@@ -28,6 +28,11 @@
   text-align: center;
 }
 
+/* no intro paragraph (the Vietnamese frames): the heading keeps 32px of its own below it */
+.noLead .head {
+  padding-bottom: var(--space-32);
+}
+
 .title {
   width: 100%;
   padding: 0 21.31px;
@@ -48,6 +53,7 @@
   color: var(--gray-800);
 }
 
+/* desktop and mobile keep the lines authored in Figma; tablet runs them together */
 .textLine {
   display: block;
 }
@@ -65,6 +71,14 @@
     padding: var(--space-80) var(--space-64) var(--space-32);
   }
 
+  .container {
+    gap: var(--space-64);
+  }
+
+  .rows {
+    gap: var(--space-48);
+  }
+
   .title {
     font: var(--heading-h4);
   }
@@ -73,8 +87,8 @@
     white-space: normal;
   }
 
-  .text {
-    font: var(--body-r);
+  .textLine {
+    display: inline;
   }
 }
 
@@ -84,7 +98,23 @@
     padding: var(--space-64) var(--space-20) var(--space-32);
   }
 
+  .container {
+    gap: var(--space-96);
+  }
+
+  .noLead {
+    gap: var(--space-48);
+  }
+
+  .rows {
+    gap: 42px;
+  }
+
   .title {
     padding: 0;
+  }
+
+  .textLine {
+    display: block;
   }
 }

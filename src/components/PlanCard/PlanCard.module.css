@@ -192,3 +192,10 @@
     transition: opacity 500ms ease-out var(--reveal-delay, 0ms);
   }
 }
+
+/* narrower than the 375 frame (320px phones): the rows Figma keeps on one line may wrap */
+@media (max-width: 359px) {
+  .nowrap .itemText {
+    white-space: normal;
+  }
+}

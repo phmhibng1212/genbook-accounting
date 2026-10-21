@@ -18,29 +18,33 @@
   min-width: 1px;
 }
 
-.fixed {
-  flex: 0 0 554px;
-  width: 554px;
-}
-
 .title {
   font: var(--heading-h4);
   color: var(--gray-900);
 }
 
-.text {
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--xs);
   font: var(--large-r);
   color: var(--gray-700);
 }
 
-/* desktop keeps the line breaks authored in Figma */
-.line,
-.titleLine {
-  display: block;
-}
-
-.mobileBreak {
-  display: none;
+/* the sparkle sits on the first line of its bullet (a 29px box, the icon centred in it) */
+.icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--xl);
+  height: 29px;
 }
 
 .media {
@@ -48,13 +52,18 @@
   min-width: 1px;
 }
 
-/* ---- tablet + mobile: copy above visual, whichever side the visual sits on at desktop ---- */
+/* ---- tablet: copy above the visual, whichever side the visual sits on at desktop ---- */
 @media (max-width: 1279px) {
   .row,
   .reverse {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    gap: var(--md);
+  }
+
+  .row:first-child {
+    gap: var(--xl);
   }
 
   .copy {
@@ -62,29 +71,25 @@
     max-width: none;
   }
 
-  .fixed {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .line,
-  .titleLine {
-    display: inline;
-  }
-
   .media {
     flex: 0 0 auto;
     width: 100%;
   }
+
+  .title {
+    font: var(--heading-h5);
+  }
 }
 
-/* the mobile frame breaks the heading by hand again */
+/* ---- mobile: every row but the first puts the visual above its copy ---- */
 @media (max-width: 767px) {
-  .titleLine {
-    display: block;
+  .row,
+  .row:first-child {
+    gap: var(--xl);
   }
 
-  .mobileBreak {
-    display: inline;
+  .mediaFirst,
+  .mediaFirst.reverse {
+    flex-direction: column-reverse;
   }
 }

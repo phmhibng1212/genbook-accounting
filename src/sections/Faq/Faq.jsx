@@ -13,9 +13,9 @@ export default function Faq() {
     <section className={styles.section} id="faqs" aria-labelledby="faqs-title">
       <div className={styles.inner}>
         <div className={styles.head}>
-          <h2 className={`${styles.title} ${faq.tightHeading ? styles.tight : ''}`} id="faqs-title" data-reveal>
+          <h2 className={`${styles.title} ${faq.tightHeading ? styles.tight : ''} gradient-block`} id="faqs-title" data-reveal>
             {faq.heading.map((part) => (
-              <span key={part.text} className={part.gradient ? 'gradient-text' : undefined}>
+              <span key={part.text} className={part.gradient ? undefined : 'solid'}>
                 {part.text}
               </span>
             ))}

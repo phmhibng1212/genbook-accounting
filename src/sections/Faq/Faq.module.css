@@ -2,18 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-80);
+  padding: var(--space-40) var(--space-80);
   overflow: clip;
   border-radius: var(--radius-40);
 }
 
-/* the design draws this block 1320 wide inside an 80px page inset, i.e. 20px past it on each side */
 .inner {
   display: flex;
   align-items: flex-start;
   gap: var(--space-40);
-  width: calc(100% + var(--space-40));
-  max-width: 1320px;
+  width: 100%;
+  max-width: var(--container-max);
   padding: var(--space-80) var(--space-40);
   border-radius: var(--radius-24);
 }
@@ -41,12 +40,13 @@
   color: var(--gray-900);
 }
 
+/* the questions keep their 638px column; the heading column takes the rest */
 .list {
   display: flex;
-  flex: 1 0 0;
+  flex: 0 0 638px;
   flex-direction: column;
-  gap: var(--sm);
-  min-width: 1px;
+  gap: var(--md);
+  width: 638px;
 }
 
 /* ---- tablet frame (800) ---- */
@@ -86,6 +86,11 @@
 /* ---- mobile frame (375) ---- */
 @media (max-width: 767px) {
   .section {
-    padding: var(--space-64) var(--space-20);
+    padding: var(--space-32) var(--space-20) var(--space-64);
+  }
+
+  /* the mobile frame sets the heading at the desktop size again (48/56) */
+  .title {
+    font: var(--heading-h3);
   }
 }

@@ -24,6 +24,7 @@
   --green-500: #22cd1f;
   --green-600: #1eb71b;
   --green-900: #123f11;
+  --blue-0: #eefaff;
   --blue-900: #0c323f;
 
   /* Typography — Inter. `font` shorthand: weight size/line-height family */
@@ -72,6 +73,11 @@
   --proposed-gray-border: #e8e8e8; /* outline plan cards */
   --proposed-footer-border: #e5e5e5; /* footer top border, social buttons */
   --proposed-ink-teal: #021c1c; /* footer background, active language, badge text */
+  --proposed-overlay: rgb(0 0 0 / 0.6); /* contact modal backdrop: the page behind it renders at 40% */
+  --proposed-input-border: rgb(0 0 0 / 0.12); /* form field outline */
+  --proposed-placeholder: #aaaaaa;
+  --proposed-on-surface: #1d1b20; /* modal close icon */
+  --proposed-error: #d92d20; /* form validation — not in the design */
   --proposed-shadow-header: 0 4px 9.9px rgb(138 232 202 / 0.38);
   --proposed-shadow-toggle: 0 1px 2px rgb(14 113 113 / 0.18);
   --proposed-shadow-faq: 0 4px 2px rgb(0 0 0 / 0.05);
@@ -91,6 +97,8 @@
   --proposed-logo: 600 22px/27px var(--font-inter); /* letter-spacing -1.76px */
   --proposed-logo-sub: 500 14px/17px var(--font-inter); /* letter-spacing -0.14px */
   --proposed-toggle: 600 13px/16px var(--font-inter);
+  --proposed-body-sm: 500 14px/20px var(--font-inter); /* form fields, "Body/Sm/Medium" */
+  --proposed-caption: 500 13px/18px var(--font-inter); /* form validation messages — not in the design */
   --proposed-plan-name: 600 22px/27px var(--font-inter); /* letter-spacing -0.44px */
   --proposed-plan-name-sm: 600 20px/24px var(--font-inter); /* Enterprise; letter-spacing -0.4px */
   --proposed-price: 600 48px/58px var(--font-inter); /* letter-spacing -1.92px */
@@ -154,6 +162,8 @@
   --state-duration: 160ms;
   --lift-distance: 8px; /* plan cards float up on hover */
   --lift-duration: 250ms;
+  --modal-duration: 260ms; /* contact modal in / out */
+  --modal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* Tablet frame (800) */

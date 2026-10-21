@@ -1,35 +1,18 @@
 /*
- * All copy and media for the page. Text is taken from the Figma frames (Desktop 70:3392,
- * Tablet 78:4735, Mobile 78:5103; Value rows: Desktop-accounting 78:6053). The FAQ answers are the only
- * copy taken from the project brief (PROMPT_GENBOOK_ACCOUNTING_LP.md) rather than Figma.
+ * All copy for the page, from the Figma file Accounting-Genbook (BSo47xDdofOAWXTIADvGwI), section "EN":
+ * Desktop 160:5773 · Tablet 160:6179 · Mobile 160:6585 · FAQ answers 160:10381 – 160:10471 · Contact modal 193:51226.
+ * Pricing, the contact panel and the footer are unchanged from the previous design and kept as they were.
  *
- * The `clip` / `heroClip` videos are the animated versions of the static product images (transparent WebM);
- * `clipStack` / `heroClipStack` are the same clips as stacked-alpha H.264 for Safari and iOS (see
- * components/ClipPlayer and scripts/encode-stacked-clips.mjs).
+ * Artwork (the animated GIF / WebP files) is not listed here: each slot is picked up by name from
+ * `src/assets/media/` (see data/media.js).
+ *
+ * Copy marked "not in the design" (form validation, success and error messages, screen-reader strings) was written
+ * for this page and should be reviewed by the owner.
  */
-import section201 from '../assets/images/section-2-01.webp'
-import section202 from '../assets/images/section-2-02.webp'
-import section203 from '../assets/images/section-2-03.webp'
-import section204 from '../assets/images/section-2-04.webp'
-import section3 from '../assets/images/section-3.webp'
-import section4 from '../assets/images/section-4.webp'
-import section5 from '../assets/images/section-5.webp'
-import section6 from '../assets/images/section-6.webp'
-import hero4 from '../assets/images/hero-4.webp'
-import heroClipUrl from '../assets/clips/hero.webm'
-import clip3 from '../assets/clips/section-3.webm'
-import clip4 from '../assets/clips/section-4.webm'
-import clip5 from '../assets/clips/section-5.webm'
-import clip6 from '../assets/clips/section-6.webm'
-import heroStack from '../assets/clips/hero.stack.mp4'
-import stack3 from '../assets/clips/section-3.stack.mp4'
-import stack4 from '../assets/clips/section-4.stack.mp4'
-import stack5 from '../assets/clips/section-5.stack.mp4'
-import stack6 from '../assets/clips/section-6.stack.mp4'
 import { links, SUPPORT_EMAIL } from './links'
 
 export const navLinks = [
-  { label: 'Value', href: '#value' },
+  { label: 'How it works', href: '#value' },
   { label: 'Features', href: '#features' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'FAQs', href: '#faqs' },
@@ -51,150 +34,122 @@ export const a11y = {
   openMenu: 'Open menu',
   closeMenu: 'Close menu',
   language: 'Language',
-  benefits: 'Genbook benefits',
-  chooseBenefit: 'Choose benefit',
-  slide: (index, total) => `${index} of ${total}`,
 }
 
 export const hero = {
-  headingLines: ['Turn Insights', 'Into Growth'],
-  text: 'Better sales reports, accurate data & real-time reporting to empower your business.',
+  heading: 'Automated Accounting for E-commerce',
+  text: 'Genbook connects data across platforms, automates journal entries, and reconciles individual orders.',
   primary: { label: 'Start free trial', href: links.signIn },
-  secondary: { label: 'Explore features', href: '#features' },
-  poster: hero4,
+  // opens the contact modal
+  secondary: { label: 'Schedule a demo' },
   imageLabel: 'Genbook accounting dashboard',
 }
 
-export const value = {
-  // heading fragments; `gradient` fragments are set in the brand gradient
+/*
+ * Headings: `|` marks a line break that is only drawn in some frames. `titleBreaks` / `breaks` list those frames
+ * (desktop · tablet · mobile); outside them the text simply reflows.
+ */
+export const steps = {
   heading: [
-    { text: 'Clear Numbers', gradient: true },
-    { text: ' You Can Trust, Down to ', gradient: false },
-    { text: 'Every Order', gradient: true },
+    { text: 'Accurate Accounting Records', gradient: false, breakAfter: ['desktop', 'tablet'] },
+    { text: ' in ', gradient: false },
+    { text: 'Just 3 Simple Steps', gradient: true },
   ],
-  text: 'Genbook turns raw marketplace transactions into accounting-ready data-classified, reconciled and ready for reporting.',
   items: [
     {
-      title: 'Accounting-Matched',
-      text: 'Automatically classifies and standardizes transaction data in accordance with accounting principles, supporting accurate journal entries and financial reporting in compliance with applicable accounting standards.',
-      image: section201,
-      artwork: 'wide',
-      paragraphs: [
-        'Automatically classifies and standardizes transaction data in accordance with accounting principles, supporting accurate journal entries and financial reporting in compliance with applicable',
-        'accounting standards.',
-      ],
-      source: 'figma',
-      tone: 'ink',
+      id: 'connect',
+      slot: 'step-1',
+      tone: 'green',
+      title: 'Connect Data and Automate Journal Entries',
+      text: 'Connect via API or uploaded reports to automatically record revenue, marketplace fees, advertising expenses, refunds, and exchange rate differences.',
+      imageLabel: 'Google Sheets, Amazon and Etsy data feeding automatic journal entries',
     },
     {
-      title: 'Revenue and Profit Transparency',
-      text: 'Provides detailed visibility into revenue, adjustments, and net profit after expenses, enabling businesses to assess financial performance and profitability with greater accuracy.',
-      image: section202,
-      artwork: 'wide',
-      source: 'figma',
+      id: 'integrate',
+      slot: 'step-2',
+      tone: 'blue',
+      title: 'Integrate Purchase Data and Off-Marketplace Expenses',
+      titleBreaks: [{ after: 'Integrate Purchase Data', frames: ['tablet'] }],
+      text: 'Import purchase and inventory data by SKU, sync marketplace records, and record off-marketplace expenses such as payroll and advertising.',
+      imageLabel: 'Sales, ads, clicks and orders charted from purchase and marketplace data',
     },
     {
-      title: 'Comprehensive Cost Control',
-      text: 'Consolidates and categorizes expenses, including marketplace fees, returns, and operating costs, providing a clear breakdown of cost structures and the factors affecting profitability.',
-      image: section203,
-      artwork: 'compact',
-      source: 'figma',
-    },
-    {
-      title: 'SKU-Level Profitability Analysis',
-      text: 'Analyzes revenue, costs, and profit at the individual SKU level, enabling businesses to identify winning and losing products.',
-      image: section204,
-      artwork: 'compact',
-      source: 'figma',
+      id: 'reconcile',
+      slot: 'step-3',
+      tone: 'gradient',
+      title: 'Reconcile, Review, and Generate Reports',
+      text: 'Genbook flags discrepancies for accountants to review and approve, then uses the processed data to prepare accounting records, financial statements, and audit documentation.',
+      imageLabel: 'Transaction reconciliation summary with accountant approval',
     },
   ],
 }
 
-export const reporting = {
-  // one array of fragments per heading line
+export const features = {
+  // one entry per heading line (each stays whole on desktop); `gradient` lines take the brand gradient
   headingLines: [
-    [
-      { text: 'From ', gradient: false },
-      { text: 'Transaction Data', gradient: true },
-      { text: ' to', gradient: false },
-    ],
-    [{ text: 'Comprehensive Financial Reporting', gradient: true }],
+    { text: 'Comprehensive Accounting Solutions', gradient: false },
+    { text: 'for E-commerce', gradient: false },
   ],
+  // paragraphs: separate lines on desktop and mobile, one flowing paragraph on tablet
   textLines: [
     'Automate financial data consolidation and reporting designed to provide',
     "complete visibility into your business's financial position and performance.",
   ],
+  // mobile: the visual sits above its copy in every row but the first (the Vietnamese frame keeps it below)
+  mobileMediaFirst: true,
   rows: [
     {
-      id: 'balance-sheet',
-      title: 'Balance Sheet',
-      lines: [
-        'Provides a comprehensive overview of assets, liabilities,',
-        "and shareholders' equity, enabling businesses to assess",
-        'their financial position, liquidity, and capital structure.',
+      id: 'multi-platform',
+      slot: 'feature-1',
+      title: 'Multi-Platform Data Integration',
+      bullets: [
+        'Integrate data from e-commerce marketplaces, payment gateways, fulfillment providers, and invoicing systems via APIs or uploaded reports.',
+        'Cross-check marketplace data against seller-uploaded reports to identify discrepancies at the individual order level.',
       ],
-      poster: section3,
-      clip: clip3,
-      clipStack: stack3,
-      imageLabel: 'Balance sheet report preview',
+      imageLabel: 'Marketplace, payment and logistics data merged into a unified ledger',
       reverse: false,
       gap: '80',
     },
     {
-      id: 'profit-and-loss',
-      title: 'Profit and Loss Statement',
-      lines: [
-        'Consolidates revenue, cost of goods sold, expenses,',
-        'and profit for the reporting period, providing insight into',
-        'operating performance and profitability to support',
-        'financial analysis and informed decision-making.',
+      id: 'sku',
+      slot: 'feature-2',
+      title: 'Cost and Profitability Analysis by SKU',
+      titleBreaks: [{ after: 'Cost and Profitability Analysis', frames: ['desktop'] }],
+      bullets: [
+        'Automatically calculate the cost of goods sold from purchase data, combining sales revenue and related expenses to determine profitability by SKU.',
       ],
-      poster: section4,
-      clip: clip4,
-      clipStack: stack4,
-      imageLabel: 'Profit and loss statement preview',
+      imageLabel: 'Selling price, cost of goods sold and gross profit by SKU',
       reverse: true,
-      fixedText: true,
       gap: '80',
     },
     {
-      id: 'cash-flows',
-      title: 'Statement of Cash Flows',
-      lines: [
-        'Consolidates and classifies cash flows from operating,',
-        'investing, and financing activities, enabling businesses',
-        'to assess cash generation capabilities, liquidity, and',
-        'overall financial health.',
+      id: 'reconciliation',
+      slot: 'feature-3',
+      title: 'Automated Reconciliation and Audit Readiness',
+      bullets: [
+        'Reconcile sales revenue, payments, e-invoices, and customs declarations to identify discrepancies.',
+        'Link journal entries to their underlying transactions and source documents for traceability.',
+        'Maintain accounting records in accordance with VAS, IFRS, and US GAAP, with supporting documentation for audit purposes.',
       ],
-      poster: section5,
-      clip: clip5,
-      clipStack: stack5,
-      imageLabel: 'Statement of cash flows preview',
+      imageLabel: 'E-invoice match rate and reconciliation across revenue, payments and customs declarations',
       reverse: false,
       gap: '89',
     },
     {
-      id: 'notes',
-      title: 'Notes to the Financial Statements',
-      titleLines: ['Notes to the|Financial', 'Statements'], // "|" = a break only the mobile frame has
-      lines: [
-        'Provides detailed disclosures on significant financial',
-        'statement items, accounting policies, and material',
-        'changes during the reporting period, enhancing the',
-        'transparency and reliability of financial reporting.',
+      id: 'gen-agent',
+      slot: 'feature-4',
+      title: 'Gen Agent AI Accounting Assistant',
+      titleBreaks: [{ after: 'Gen Agent', frames: ['desktop', 'mobile'] }],
+      bullets: [
+        'Categorize transactions, flag discrepancies, and recommend appropriate journal entries.',
+        'Retrieve transaction-level financial data and supporting documents.',
       ],
-      poster: section6,
-      clip: clip6,
-      clipStack: stack6,
-      imageLabel: 'Notes to the financial statements preview',
+      imageLabel: 'Gen Agent flagging a difference and suggesting a journal entry',
       reverse: true,
-      gap: '40',
+      gap: '80',
     },
   ],
 }
-
-export const heroClip = heroClipUrl
-export const heroClipStack = heroStack
 
 export const pricing = {
   perMonth: '/ month',
@@ -290,23 +245,34 @@ export const faq = {
   text: 'Find answers to common questions about Genbook and its services.',
   items: [
     {
-      question: 'How many stores can I connect to a single Genbook account?',
+      question: 'How many stores can I connect to one Genbook account?',
       answer:
-        'A single Genbook account allows you to connect and manage multiple stores on the same platform, enabling centralized data management and streamlined business performance monitoring.',
+        'A single Genbook account allows you to connect and manage multiple stores in one place, making it easier to centralize data and monitor business performance.',
     },
     {
-      question: 'Can I upgrade or change my subscription plan?',
+      question: 'Do I need another accounting software if I use Genbook?',
       answer:
-        'Yes. Genbook offers flexible subscription plans that can be upgraded or adjusted to accommodate your business needs and growth. The Genbook team is available to help you select the most suitable plan.',
+        'Not necessarily. Genbook can serve as your primary accounting system. If you already use another accounting software, Genbook can process and reconcile your e-commerce data and transfer journal entries to your existing system.',
     },
     {
-      question: 'Can I cancel my subscription at any time?',
-      answer: 'Yes. You can cancel your subscription at any time without providing a reason.',
+      question: 'Does Genbook support financial reporting under accounting standards?',
+      answer:
+        'Yes. Genbook supports financial reporting in accordance with VAS, IFRS, and US GAAP, meeting the accounting needs of businesses operating in Vietnam and international markets.',
+    },
+    {
+      question: 'Can Genbook export accounting records and supporting documents for audits?',
+      answer:
+        'Yes. Genbook allows you to export general ledgers, reconciliation reports, and supporting documents by accounting period. Journal entries are linked to their underlying transactions and source documents for easy review, reconciliation, and auditing.',
+    },
+    {
+      question: 'How does Genbook protect my accounting and business data?',
+      answer:
+        'Genbook encrypts data both in transit and at rest. Access is restricted to authorized accounts, allowing businesses to control who can access and manage their information.',
     },
     {
       question: 'What payment methods does Genbook accept?',
       answer:
-        'Genbook accepts all major credit cards and PayPal, providing convenient payment options for subscription and service fees.',
+        'Genbook accepts major credit cards and PayPal, making it easy to pay for your subscription and manage your account.',
     },
   ],
 }
@@ -362,4 +328,36 @@ export const footer = {
     ],
   },
   copyright: '© 2026 Genbook. All rights reserved.',
+}
+
+/* The "Schedule a demo" pop-up (Figma "Modal pop-up-en" 193:51226). Placeholders, title and button are from the
+   design; `errors`, `success`, `failure` and `a11y` are not in the design. */
+export const contactModal = {
+  titleLines: ['Let’s start a', 'Conversation'],
+  fields: {
+    fullName: 'Full name',
+    phone: 'Contact number',
+    email: 'Email',
+    industry: 'Industry',
+    company: 'Company name',
+    message: 'Send us a message',
+  },
+  submit: 'Contact us',
+  submitting: 'Sending…',
+  errors: {
+    fullName: 'Please enter your full name.',
+    phone: 'Please enter a valid phone number.',
+    email: 'Please enter a valid email address.',
+  },
+  success: {
+    title: 'Thank you!',
+    text: 'We have your details. The Genbook team will get in touch within 24 hours.',
+    close: 'Close',
+  },
+  failure: `Something went wrong. Please try again, or email us at ${SUPPORT_EMAIL}.`,
+  a11y: {
+    dialog: 'Schedule a demo',
+    close: 'Close',
+    required: 'required',
+  },
 }

@@ -39,8 +39,8 @@
 }
 
 .bands-mobile {
-  bottom: -69.15px;
-  left: calc(50% - 3.75px);
+  bottom: -8.15px;
+  left: 50%;
   transform: translateX(-50%);
 }
 
@@ -68,11 +68,6 @@
   font: var(--heading-h2);
 }
 
-/* desktop and mobile set the headline on two lines; tablet keeps it on one */
-.line {
-  display: block;
-}
-
 .text {
   font: var(--heading-h5-r);
 }
@@ -83,14 +78,12 @@
   gap: var(--md);
 }
 
-.action {
-  width: 171px;
+.primary {
   min-width: 171px;
 }
 
-/* Vietnamese labels are longer than the 171px the English buttons are drawn at */
-.fitActions .action {
-  width: auto;
+.secondary {
+  min-width: 148px;
 }
 
 /* ---- image ---- */
@@ -113,12 +106,14 @@
     flex-direction: column;
     justify-content: center;
     gap: var(--space-40);
-    padding: var(--space-60) 0;
+    padding: var(--space-40) 0 var(--space-80);
   }
 
   .copy {
     flex: 0 0 auto;
     align-items: center;
+    width: 100%;
+    min-width: 0;
     text-align: center;
   }
 
@@ -132,67 +127,45 @@
     font: var(--heading-h4);
   }
 
-  .line {
-    display: inline;
-  }
-
-  /* the Vietnamese tablet frame keeps the two authored lines */
-  .stacked .line {
-    display: block;
-  }
-
-  .text {
-    font: var(--large-r);
-  }
-
-  /* two equal columns, like the two "fill" buttons in the Figma tablet frame */
+  /* the tablet and mobile frames keep the 24px intro */
   .actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
-  }
-
-  .action {
-    width: auto;
-    min-width: 0;
   }
 
   .media {
     flex: 0 0 auto;
     width: 100%;
-    padding-left: 0;
-    /* the frames cap the artwork at 577.55px tall */
-    max-height: 577.551px;
+    padding-left: var(--md);
   }
 }
 
 /* ---- mobile frame (375) ---- */
 @media (max-width: 767px) {
   .hero {
-    padding: var(--space-40) 0 0;
+    padding: var(--space-64) var(--space-20) 0;
   }
 
   .wrap {
-    gap: var(--space-67);
-    padding: 0 var(--space-20) var(--space-80);
-    border-radius: var(--radius-sm);
+    padding-top: var(--space-32);
   }
 
   .copy {
-    gap: var(--xl);
-    width: 100%;
-    min-width: 0;
-  }
-
-  .line {
-    display: block;
+    max-width: 540px;
   }
 
   .actions {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .action {
+  .primary,
+  .secondary {
     width: 100%;
+  }
+
+  .media {
+    padding-left: 0;
   }
 }

@@ -1,0 +1,116 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-120) var(--space-80) var(--space-40);
+  background: var(--gray-0);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-80);
+  width: 100%;
+  max-width: var(--container-max);
+}
+
+.title {
+  width: 100%;
+  max-width: 700px;
+  font: var(--heading-h3);
+  color: var(--gray-900);
+  text-align: center;
+}
+
+/* three cards side by side; they share the height of the tallest */
+.cards {
+  --card-angle: 97.29deg;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--xl);
+  align-items: stretch;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+  min-width: 0;
+  padding: var(--xl);
+  overflow: clip;
+  border-radius: var(--radius-sm);
+}
+
+.green {
+  background: var(--green-0);
+}
+
+.blue {
+  background: var(--blue-0);
+}
+
+.gradient {
+  background-image: linear-gradient(var(--card-angle), var(--proposed-bg-from) 0%, var(--proposed-bg-to) 100%);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md);
+}
+
+.cardTitle {
+  font: var(--heading-h5);
+  color: var(--gray-900);
+}
+
+.cardText {
+  font: var(--large-r);
+  color: var(--gray-900);
+}
+
+/* ---- tablet frame (800): one card per row ---- */
+@media (max-width: 1279px) {
+  .section {
+    gap: var(--space-80);
+    padding: var(--space-80) var(--space-64) var(--space-32);
+  }
+
+  .container {
+    gap: var(--space-64);
+  }
+
+  .title {
+    max-width: 800px;
+    font: var(--heading-h4);
+  }
+
+  .cards {
+    --card-angle: 101.2deg;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-32);
+  }
+}
+
+/* ---- mobile frame (375) ---- */
+@media (max-width: 767px) {
+  .section {
+    gap: var(--space-32);
+    padding: var(--space-64) var(--space-20) var(--space-32);
+  }
+
+  .container {
+    gap: var(--space-32);
+  }
+
+  .cards {
+    --card-angle: 97.11deg;
+    gap: var(--xl);
+  }
+
+  .card {
+    padding: var(--md);
+  }
+}

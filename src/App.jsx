@@ -1,12 +1,13 @@
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Hero from './sections/Hero/Hero'
-import Value from './sections/Value/Value'
-import Reporting from './sections/Reporting/Reporting'
+import Steps from './sections/Steps/Steps'
+import Features from './sections/Features/Features'
 import Pricing from './sections/Pricing/Pricing'
 import Faq from './sections/Faq/Faq'
 import Cta from './sections/Cta/Cta'
 import useScrollReveal from './hooks/useScrollReveal'
+import { ContactModalProvider } from './components/ContactModal/ContactModalContext'
 import { LanguageProvider } from './i18n/LanguageContext'
 
 function Page() {
@@ -17,8 +18,8 @@ function Page() {
       <Header />
       <main>
         <Hero />
-        <Value />
-        <Reporting />
+        <Steps />
+        <Features />
         <Pricing />
         <Faq />
         <Cta />
@@ -31,7 +32,9 @@ function Page() {
 export default function App() {
   return (
     <LanguageProvider>
-      <Page />
+      <ContactModalProvider>
+        <Page />
+      </ContactModalProvider>
     </LanguageProvider>
   )
 }

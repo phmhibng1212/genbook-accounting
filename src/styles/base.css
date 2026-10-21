@@ -72,6 +72,19 @@ a {
   color: transparent;
 }
 
+/* Multi-line headline whose brand-gradient part belongs to ONE gradient that runs over the whole block (Figma sets the
+   gradient on the text node, so a fragment on a later line sits at the blue end). The plain fragments are `.solid`. */
+.gradient-block {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-block .solid {
+  -webkit-text-fill-color: var(--gray-900);
+}
+
 /* Left / right / bottom hairline in the brand gradient (green -> blue, top to bottom).
    Figma's gradient stroke comes through the API as a flat green border, so it is rebuilt here as a
    masked ring. The element keeps a transparent 1px border so the layout equals a normal border. */

@@ -1,18 +1,18 @@
 /*
- * Vietnamese copy, taken from the Vietnamese Figma frames (Desktop 91:9459, Tablet 91:9822,
- * Mobile 91:10185 and the FAQ / menu components 91:10548 – 91:10671).
+ * Vietnamese copy, from the Vietnamese Figma frames (section "VI", 194:51228: Desktop 160:8531 · Tablet 160:8933 ·
+ * Mobile 160:9335 · FAQ answers 160:10558 – 160:10648 · Contact modal 193:51225). Pricing, the contact panel and the
+ * footer are unchanged from the previous design and kept as they were.
  *
- * This is a patch over the English content (see i18n/merge.js): only text is listed here, so media,
- * links and layout flags come from content.js. Anything not listed falls back to English.
+ * This is a patch over the English content (see i18n/merge.js): only text is listed here, so media, links and layout
+ * flags come from content.js. Anything not listed falls back to English. Where an English array carries a layout
+ * flag that does not apply to the Vietnamese text, the patch resets it to `null`.
  *
- * Wording decisions made with the owner: "Giá trị đem lại" everywhere, "chính xác" in the hero,
- * "Khám phá tính năng" for the hero's second button, "Dùng thử miễn phí" for every free-trial button,
- * "Liên hệ" for the CTA's contact button (the Vietnamese tablet / mobile CTA frames still read "Contact us" /
- * "Start free trial").
+ * Copy marked "not in the design" (form validation, success and error messages, screen-reader strings) was written
+ * for this page and should be reviewed by the owner.
  */
 export default {
   navLinks: [
-    { label: 'Giá trị đem lại' },
+    { label: 'Cách hoạt động' },
     { label: 'Tính năng' },
     { label: 'Bảng giá' },
     { label: 'Câu hỏi' },
@@ -31,47 +31,85 @@ export default {
     openMenu: 'Mở menu',
     closeMenu: 'Đóng menu',
     language: 'Ngôn ngữ',
-    benefits: 'Giá trị Genbook mang lại',
-    chooseBenefit: 'Chọn giá trị',
-    slide: (index, total) => `${index} trên ${total}`,
   },
 
   hero: {
-    headingLines: ['Biến dữ liệu', 'thành tăng trưởng'],
-    stackLines: true,
-    fitActions: true,
-    text: 'Tối ưu báo cáo bán hàng, dữ liệu chính xác và cập nhật thời gian thực giúp thúc đẩy doanh nghiệp của bạn.',
+    heading: 'Tự động hoá kế toán Thương mại điện tử',
+    text: 'Genbook kết nối dữ liệu đa nền tảng rồi tự động ghi nhận bút toán và đối soát giao dịch theo từng đơn hàng.',
     primary: { label: 'Dùng thử miễn phí' },
-    secondary: { label: 'Khám phá tính năng' },
+    secondary: { label: 'Đặt lịch trải nghiệm sản phẩm' },
     imageLabel: 'Bảng điều khiển kế toán Genbook',
   },
 
-  value: {
+  steps: {
     heading: [
-      { text: 'Số liệu minh bạch, ', gradient: true },
-      { text: 'đáng tin cậy', gradient: false },
-      { text: ' ', gradient: true },
-      { text: 'đến', gradient: false },
-      { text: ' từng đơn hàng', gradient: true },
+      { text: '3 bước đơn giản', gradient: true, breakAfter: null },
+      { text: ' để có sổ sách kế toán chính xác', gradient: false },
     ],
-    text: 'Genbook chuyển đổi dữ liệu giao dịch thô từ các sàn thương mại điện tử thành dữ liệu phục vụ hạch toán kế toán, được phân loại, đối soát và sẵn sàng cho việc lập báo cáo.',
     items: [
       {
-        title: 'Khớp với chuẩn mực kế toán',
-        text: 'Tự động phân loại và chuẩn hóa dữ liệu giao dịch theo nghiệp vụ kế toán, hỗ trợ ghi nhận bút toán chính xác và lập báo cáo tài chính theo các chuẩn mực hiện hành.',
-        paragraphs: null,
+        title: 'Kết nối dữ liệu và ghi nhận bút toán',
+        text: 'Kết nối dữ liệu bán hàng qua API hoặc báo cáo tải lên, tự động ghi nhận bút toán doanh thu, phí sàn, quảng cáo, hoàn tiền và chênh lệch tỷ giá.',
+        imageLabel: 'Dữ liệu từ Google Sheets, Amazon và Etsy được ghi nhận thành bút toán tự động',
       },
       {
-        title: 'Minh bạch doanh thu và lợi nhuận',
-        text: 'Theo dõi chi tiết doanh thu, các khoản điều chỉnh và lợi nhuận thực tế sau khi trừ chi phí, giúp doanh nghiệp nắm rõ tình hình tài chính và đánh giá chính xác hiệu quả kinh doanh.',
+        title: 'Bổ sung chi phí và dữ liệu mua hàng',
+        titleBreaks: null,
+        text: 'Cập nhật dữ liệu mua hàng, tồn kho theo từng mã sản phẩm, đồng bộ với sàn và bổ sung các bút toán ngoài sàn như tiền lương, phí và quảng cáo.',
+        imageLabel: 'Biểu đồ doanh thu, quảng cáo, lượt nhấp và đơn hàng từ dữ liệu mua hàng và dữ liệu sàn',
       },
       {
-        title: 'Kiểm soát toàn diện chi phí',
-        text: 'Tổng hợp và phân loại các khoản chi phí, từ phí sàn, hoàn trả đến vận hành, giúp doanh nghiệp nắm rõ cơ cấu chi tiêu và các yếu tố tác động đến lợi nhuận.',
+        title: 'Đối soát, phê duyệt và lập báo cáo',
+        text: 'Genbook đối soát và xác định giao dịch chênh lệch để kế toán kiểm tra, phê duyệt. Dữ liệu sau xử lý được sử dụng để lập sổ sách, báo cáo tài chính và cung cấp chứng từ phục vụ kiểm toán.',
+        imageLabel: 'Bảng đối soát giao dịch và phê duyệt của kế toán',
+      },
+    ],
+  },
+
+  features: {
+    // the Vietnamese frames: gradient on the first line, no intro paragraph, and the visual stays below its copy on mobile
+    headingLines: [
+      { text: 'Giải pháp kế toán toàn diện', gradient: true },
+      { text: 'cho thương mại điện tử', gradient: false },
+    ],
+    textLines: [],
+    mobileMediaFirst: false,
+    rows: [
+      {
+        title: 'Kết nối dữ liệu đa nền tảng',
+        titleBreaks: null,
+        bullets: [
+          'Kết nối dữ liệu từ sàn thương mại điện tử, thanh toán, kho vận và hóa đơn qua API hoặc báo cáo tải lên.',
+          'Đối chiếu dữ liệu trực tiếp từ sàn với báo cáo người bán cung cấp, phát hiện chênh lệch theo từng đơn hàng.',
+        ],
+        imageLabel: 'Dữ liệu sàn, thanh toán và kho vận được hợp nhất trong một sổ cái',
       },
       {
-        title: 'Xác định lợi nhuận theo từng sản phẩm',
-        text: 'Phân tích chi tiết doanh thu, chi phí và lợi nhuận theo từng mã sản phẩm (SKU), giúp doanh nghiệp xác định sản phẩm kinh doanh hiệu quả và những sản phẩm cần cải thiện hiệu suất.',
+        title: 'Quản lý giá vốn và lợi nhuận theo SKU',
+        titleBreaks: [{ after: 'Quản lý giá vốn và lợi nhuận', frames: ['desktop', 'mobile'] }],
+        bullets: [
+          'Tự động xác định giá vốn từ dữ liệu mua hàng, kết hợp doanh thu và các khoản chi phí để tính toán lợi nhuận theo từng SKU.',
+        ],
+        imageLabel: 'Giá bán, giá vốn và lợi nhuận gộp theo từng SKU',
+      },
+      {
+        title: 'Tự động đối soát đa nguồn và hỗ trợ kiểm toán',
+        titleBreaks: null,
+        bullets: [
+          'Đối chiếu doanh thu, thanh toán, hóa đơn điện tử và chứng từ hải quan để phát hiện chênh lệch.',
+          'Liên kết bút toán với giao dịch và chứng từ gốc để thuận tiện truy xuất.',
+          'Hỗ trợ lập sổ sách theo VAS, IFRS và US GAAP, cung cấp hồ sơ phục vụ kiểm toán.',
+        ],
+        imageLabel: 'Tỷ lệ khớp hóa đơn điện tử và đối soát doanh thu, thanh toán, chứng từ hải quan',
+      },
+      {
+        title: 'Gen Agent - Trợ lý AI cho kế toán',
+        titleBreaks: null,
+        bullets: [
+          'Phân loại giao dịch, phát hiện sai lệch và đề xuất bút toán kế toán phù hợp.',
+          'Phân tích nguyên nhân chênh lệch, hỗ trợ tra cứu số liệu và truy xuất chứng từ theo từng giao dịch.',
+        ],
+        imageLabel: 'Gen Agent phát hiện chênh lệch và đề xuất bút toán',
       },
     ],
   },
@@ -153,56 +191,6 @@ export default {
     ],
   },
 
-  reporting: {
-    headingLines: [
-      [
-        { text: 'Từ ', gradient: false },
-        { text: 'dữ liệu giao dịch', gradient: true },
-      ],
-      [
-        { text: 'Đến ', gradient: false },
-        { text: 'báo cáo tài chính toàn diện', gradient: true },
-      ],
-    ],
-    textLines: [
-      'Tự động tổng hợp số liệu và lập hệ thống báo cáo tài chính toàn diện, phản ánh chính xác tình hình tài chính và kết quả kinh doanh của doanh nghiệp.',
-    ],
-    rows: [
-      {
-        title: 'Bảng cân đối kế toán',
-        titleLines: null,
-        lines: [
-          'Tổng hợp đầy đủ tài sản, nợ phải trả và vốn chủ sở hữu, mang lại cái nhìn toàn diện về tình hình tài chính, hỗ trợ đánh giá khả năng thanh toán, cơ cấu nguồn vốn và mức độ ổn định tài chính của doanh nghiệp.',
-        ],
-        imageLabel: 'Xem trước bảng cân đối kế toán',
-      },
-      {
-        title: 'Báo cáo kết quả hoạt động kinh doanh',
-        titleLines: null,
-        lines: [
-          'Tổng hợp doanh thu, giá vốn, chi phí và lợi nhuận trong kỳ báo cáo, phản ánh kết quả hoạt động kinh doanh và khả năng sinh lời, tạo cơ sở đánh giá hiệu quả và đưa ra các quyết định tài chính.',
-        ],
-        imageLabel: 'Xem trước báo cáo kết quả hoạt động kinh doanh',
-      },
-      {
-        title: 'Báo cáo lưu chuyển tiền tệ',
-        titleLines: null,
-        lines: [
-          'Tổng hợp và phân loại dòng tiền từ hoạt động kinh doanh, đầu tư và tài chính, hỗ trợ đánh giá khả năng tạo tiền, tình hình thanh khoản và sức khỏe tài chính của doanh nghiệp.',
-        ],
-        imageLabel: 'Xem trước báo cáo lưu chuyển tiền tệ',
-      },
-      {
-        title: 'Bản thuyết minh báo cáo tài chính',
-        titleLines: null,
-        lines: [
-          'Cung cấp thông tin chi tiết về các khoản mục trọng yếu, chính sách kế toán và những biến động tài chính trong kỳ, góp phần nâng cao tính minh bạch và độ tin cậy của hệ thống báo cáo tài chính.',
-        ],
-        imageLabel: 'Xem trước bản thuyết minh báo cáo tài chính',
-      },
-    ],
-  },
-
   faq: {
     tightHeading: true,
     heading: [
@@ -215,16 +203,27 @@ export default {
       {
         question: 'Một tài khoản Genbook có thể kết nối bao nhiêu cửa hàng?',
         answer:
-          'Một tài khoản Genbook cho phép kết nối và quản lý nhiều cửa hàng trên cùng một nền tảng, thuận tiện cho việc tập trung dữ liệu và theo dõi hoạt động kinh doanh.',
+          'Một tài khoản Genbook có thể kết nối và quản lý nhiều cửa hàng trên cùng một nền tảng, giúp doanh nghiệp tập trung dữ liệu và theo dõi hiệu quả kinh doanh thuận tiện.',
       },
       {
-        question: 'Tôi có thể nâng cấp hoặc thay đổi gói dịch vụ không?',
+        question: 'Doanh nghiệp có cần sử dụng thêm phần mềm kế toán khác khi đã có Genbook không?',
         answer:
-          'Có. Genbook cung cấp các gói dịch vụ linh hoạt, cho phép bạn nâng cấp hoặc điều chỉnh theo nhu cầu sử dụng và quy mô kinh doanh. Đội ngũ Genbook luôn sẵn sàng tư vấn để bạn lựa chọn gói dịch vụ phù hợp.',
+          'Không bắt buộc. Genbook có thể được sử dụng làm hệ thống kế toán chính. Nếu doanh nghiệp đang sử dụng phần mềm kế toán khác, Genbook có thể hỗ trợ xử lý, đối soát dữ liệu thương mại điện tử và chuyển bút toán sang hệ thống hiện có.',
       },
       {
-        question: 'Tôi có thể hủy bất cứ lúc nào không?',
-        answer: 'Có. Bạn có thể chủ động hủy đăng ký dịch vụ bất cứ lúc nào mà không cần cung cấp lý do.',
+        question: 'Genbook có hỗ trợ lập báo cáo tài chính theo chuẩn mực kế toán không?',
+        answer:
+          'Có. Genbook hỗ trợ lập báo cáo tài chính theo VAS, IFRS và US GAAP, phù hợp với nhu cầu kế toán của doanh nghiệp hoạt động tại Việt Nam và các thị trường quốc tế.',
+      },
+      {
+        question: 'Genbook có hỗ trợ xuất sổ sách và chứng từ phục vụ kiểm toán không?',
+        answer:
+          'Có. Genbook hỗ trợ xuất sổ cái, bảng đối soát và các chứng từ liên quan theo từng kỳ kế toán. Các bút toán được liên kết với giao dịch và chứng từ gốc, thuận tiện cho việc kiểm tra, đối chiếu và kiểm toán.',
+      },
+      {
+        question: 'Dữ liệu kế toán và thông tin doanh nghiệp trên Genbook được bảo mật như thế nào?',
+        answer:
+          'Dữ liệu được mã hóa trong quá trình truyền tải và lưu trữ. Quyền truy cập được giới hạn theo tài khoản được cấp phép, giúp doanh nghiệp kiểm soát việc truy cập và quản lý thông tin trên hệ thống.',
       },
       {
         question: 'Genbook hỗ trợ những phương thức thanh toán nào?',
@@ -275,5 +274,35 @@ export default {
       links: [{ label: 'Chính sách bảo mật' }, { label: 'Điều khoản dịch vụ' }, { label: 'Trung tâm hỗ trợ' }],
     },
     copyright: '© 2026 Genbook. Bảo lưu mọi quyền.',
+  },
+
+  contactModal: {
+    titleLines: ['Hãy bắt đầu một', 'Cuộc trò chuyện'],
+    fields: {
+      fullName: 'Họ tên đầy đủ',
+      phone: 'Số điện thoại',
+      email: 'Email',
+      industry: 'Lĩnh vực bạn đang hoạt động',
+      company: 'Tên công ty',
+      message: 'Gửi lời nhắn tới chúng tôi',
+    },
+    submit: 'Liên hệ',
+    submitting: 'Đang gửi…',
+    errors: {
+      fullName: 'Vui lòng nhập họ tên của bạn.',
+      phone: 'Vui lòng nhập số điện thoại hợp lệ.',
+      email: 'Vui lòng nhập địa chỉ email hợp lệ.',
+    },
+    success: {
+      title: 'Cảm ơn bạn!',
+      text: 'Genbook đã nhận được thông tin của bạn. Đội ngũ Genbook sẽ liên hệ trong vòng 24 giờ.',
+      close: 'Đóng',
+    },
+    failure: 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc gửi email tới support@genbook.io.',
+    a11y: {
+      dialog: 'Đặt lịch trải nghiệm sản phẩm',
+      close: 'Đóng',
+      required: 'bắt buộc',
+    },
   },
 }
