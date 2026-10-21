@@ -301,7 +301,7 @@ export default {
     },
     failure: 'Đã có lỗi xảy ra. Vui lòng thử lại hoặc gửi email tới support@genbook.io.',
     a11y: {
-      dialog: 'Đặt lịch trải nghiệm sản phẩm',
+      dialog: 'Đặt lịch trải nghiệm',
       close: 'Đóng',
       required: 'bắt buộc',
     },
