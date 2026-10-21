@@ -1,7 +1,8 @@
 import Button from '../../components/Button/Button'
 import { useContactModal } from '../../components/ContactModal/ContactModalContext'
+import ClipPlayer from '../../components/ClipPlayer/ClipPlayer'
 import MediaSlot from '../../components/MediaSlot/MediaSlot'
-import { mediaFor } from '../../data/media'
+import { clipFor, mediaFor } from '../../data/media'
 import useBreakpoint from '../../hooks/useBreakpoint'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { desktop, tablet, mobile, wash } from './heroBands'
@@ -47,6 +48,7 @@ export default function Hero() {
   const { language, content } = useLanguage()
   const { openContact } = useContactModal()
   const { hero } = content
+  const clip = clipFor('hero', language)
   const { angle, a, b, c } = wash[breakpoint]
 
   return (
@@ -96,7 +98,11 @@ export default function Hero() {
         </div>
 
         <div className={styles.media} data-reveal="image" data-reveal-delay="150">
-          <MediaSlot src={mediaFor('hero', language)} label={hero.imageLabel} aspectRatio="1960 / 1415" priority />
+          {clip ? (
+            <ClipPlayer src={clip.src} stack={clip.stack} poster={clip.poster} label={hero.imageLabel} aspectRatio="1960 / 1415" />
+          ) : (
+            <MediaSlot src={mediaFor('hero', language)} label={hero.imageLabel} aspectRatio="1960 / 1415" priority />
+          )}
         </div>
       </div>
     </section>

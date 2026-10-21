@@ -26,7 +26,7 @@ the DOM differs (the Hero decoration). Wider than 1280 the page keeps its 80px i
 
 - `src/styles/tokens.css` — Figma variables (names kept) + clearly marked `--proposed-*`, `--space-*`, `--radius-*`
   values that the design uses but has no variable for.
-- `src/components/` — Button, Logo, LanguageToggle, Header, MediaSlot, FrameBreak, FeatureRow, PlanCard, FaqItem,
+- `src/components/` — Button, Logo, LanguageToggle, Header, MediaSlot, ClipPlayer, FrameBreak, FeatureRow, PlanCard, FaqItem,
   SocialLink, FooterColumn, Footer, ContactModal.
 - `src/sections/` — Hero, Steps ("3 Simple Steps"), Features, Pricing, Faq, Cta.
 - `src/data/content.js` — all copy (EN); `content.vi.js` patches it for Vietnamese.
@@ -38,7 +38,7 @@ Pricing, the contact panel (CTA) and the footer are unchanged from the previous 
 
 ## Animated artwork
 
-Every illustration is a GIF / animated WebP dropped into `src/assets/media/` as `<slot>.<lang>.<ext>`:
+Every illustration lives in `src/assets/media/` as `<slot>.<lang>.<ext>`:
 
 | Slot | Where |
 | --- | --- |
@@ -48,9 +48,21 @@ Every illustration is a GIF / animated WebP dropped into `src/assets/media/` as 
 
 Files are found by name (`data/media.js`), so adding or replacing one needs no code change, and a Vietnamese slot without
 its own `.vi.` file falls back to the English file. A slot without a file keeps its reserved frame (the aspect ratio of
-the design) and shows nothing. `MediaSlot` lazy-loads and async-decodes the image; the browser animates it and pauses
-it while it is off screen. The sparkle at the start of each feature bullet is `src/assets/icons/bullet-sparkle.svg`
+the design) and shows nothing. The sparkle at the start of each feature bullet is `src/assets/icons/bullet-sparkle.svg`
 (optional for the same reason).
+
+Two kinds of file:
+
+- **GIF / animated WebP** (`step-1.en.gif` …): shown by `MediaSlot`, lazy-loaded and async-decoded; the browser animates it
+  (looping) and pauses it while it is off screen.
+- **Transparent WebM clip** (`hero.en.webm`, `hero.vi.webm`): played by `ClipPlayer`. No controls, no loop, starts from the first
+  frame when 40% of the frame is visible, holds the last frame, rewinds when the frame has fully left the viewport so scrolling
+  back replays it. It plays whatever `prefers-reduced-motion` says (the clip is the content). Safari and every iOS browser
+  cannot decode a WebM's alpha channel (black background), so there `ClipPlayer` plays `<slot>.<lang>.stack.mp4` instead: H.264
+  with the premultiplied colour on the left and the alpha matte on the right, merged by a small WebGL canvas
+  (`stackedAlpha.js`); without WebGL the still picture `<slot>.<lang>.poster.webp` (the last frame) shows.
+  After adding or replacing a WebM, run `node scripts/encode-clips.mjs --force` (needs `ffmpeg` on the PATH with libvpx,
+  libx264 and libwebp) to rebuild the `.stack.mp4` and `.poster.webp`. Safari / iOS playback has not been tested on a real device.
 
 ## Contact modal ("Schedule a demo")
 
