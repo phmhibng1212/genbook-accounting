@@ -162,10 +162,9 @@ export const pricing = {
     { text: 'Plans That ', gradient: false },
     { text: 'Grow With Your Business', gradient: true },
   ],
-  textLines: [
-    'Choose a plan by the number of entities, marketplaces and',
-    'orders you manage. Every plan starts with a free trial.',
-  ],
+  text: 'Choose the plan that best fits your business size, order volume, and financial and accounting management needs.',
+  // the desktop frame breaks the line here; the others let it flow
+  textBreaks: [{ after: 'order volume,', frames: ['desktop'] }],
   enterprise: {
     title: 'Enterprise',
     lines: [

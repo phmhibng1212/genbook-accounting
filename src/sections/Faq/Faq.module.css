@@ -89,8 +89,8 @@
     padding: var(--space-32) var(--space-20) var(--space-64);
   }
 
-  /* the mobile frame sets the heading at the desktop size again (48/56) */
+  /* the mobile frame keeps the tablet heading size (32/40) */
   .title {
-    font: var(--heading-h3);
+    font: var(--heading-h4);
   }
 }

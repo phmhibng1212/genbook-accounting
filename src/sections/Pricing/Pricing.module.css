@@ -32,18 +32,10 @@
   white-space: nowrap;
 }
 
-.wrapTitle {
-  white-space: normal;
-}
-
 .text {
   padding: 0 var(--space-29-55);
   font: var(--large-r);
   color: var(--gray-900);
-}
-
-.textLine {
-  display: block;
 }
 
 /* ---- Enterprise banner ---- */
@@ -164,21 +156,13 @@
 
 /* ---- mobile frame (375) ---- */
 @media (max-width: 767px) {
-  .wideBreak {
-    display: none;
-  }
-
   .section {
     padding: var(--space-64) var(--space-20) var(--space-32);
   }
 
-  /* the mobile frame sets the intro full width, as one paragraph rather than the two authored lines */
+  /* the mobile frame sets the intro full width */
   .text {
     padding: 0;
-  }
-
-  .textLine {
-    display: inline;
   }
 
   .enterpriseCta,

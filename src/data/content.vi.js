@@ -121,17 +121,18 @@ export default {
     // the Vietnamese tablet / mobile banner keeps the solid desktop colours (the English one is 80% pale)
     solidBanner: true,
     bannerAngles: { desktop: '150.16deg', tablet: '119.05deg', mobile: '102.59deg' },
-    wrapHeading: true,
     fitEnterpriseCta: true,
+    // desktop: "theo nhu cầu doanh nghiệp" is plain; tablet / mobile colour "theo" with the gradient
     heading: [
-      // the desktop and tablet frames break the line after "cho"; the mobile frame lets it flow
-      { text: 'Giá trị dành cho ', gradient: false, breakAfter: true },
-      { text: 'phát triển doanh nghiệp', gradient: true },
-      { text: ' của bạn', gradient: false },
+      { text: 'Gói dịch vụ linh hoạt', gradient: true, breakAfter: ['desktop'] },
+      { text: ' theo nhu cầu doanh nghiệp', gradient: false },
     ],
-    textLines: [
-      'Lựa chọn gói dịch vụ phù hợp dựa trên số lượng pháp nhân, sàn thương mại điện tử và đơn hàng cần quản lý. Tất cả các gói đều có thời gian dùng thử miễn phí.',
+    headingCompact: [
+      { text: 'Gói dịch vụ linh hoạt theo', gradient: true, breakAfter: ['tablet'] },
+      { text: ' nhu cầu doanh nghiệp', gradient: false },
     ],
+    text: 'Lựa chọn gói phù hợp với quy mô kinh doanh, số lượng đơn hàng và nhu cầu quản lý tài chính, kế toán của doanh nghiệp.',
+    textBreaks: [{ after: 'số lượng đơn hàng', frames: ['desktop'] }],
     enterprise: {
       title: 'Doanh nghiệp lớn',
       lines: [
