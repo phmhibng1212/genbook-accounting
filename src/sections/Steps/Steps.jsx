@@ -1,7 +1,8 @@
 import { Fragment } from 'react'
+import ClipPlayer from '../../components/ClipPlayer/ClipPlayer'
 import FramedText, { FrameBreak } from '../../components/FrameBreak/FrameBreak'
 import MediaSlot from '../../components/MediaSlot/MediaSlot'
-import { mediaFor } from '../../data/media'
+import { clipFor, mediaFor } from '../../data/media'
 import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './Steps.module.css'
 
@@ -23,23 +24,30 @@ export default function Steps() {
         </h2>
 
         <div className={styles.cards} data-reveal-group>
-          {steps.items.map((item) => (
-            <article key={item.id} className={`${styles.card} ${styles[item.tone]}`} data-reveal>
-              <MediaSlot
-                src={mediaFor(item.slot, language)}
-                label={item.imageLabel}
-                aspectRatio="672 / 496"
-                width={672}
-                height={496}
-              />
-              <div className={styles.copy}>
-                <h3 className={styles.cardTitle}>
-                  <FramedText text={item.title} breaks={item.titleBreaks} />
-                </h3>
-                <p className={styles.cardText}>{item.text}</p>
-              </div>
-            </article>
-          ))}
+          {steps.items.map((item) => {
+            const clip = clipFor(item.slot, language)
+            return (
+              <article key={item.id} className={`${styles.card} ${styles[item.tone]}`} data-reveal>
+                {clip ? (
+                  <ClipPlayer src={clip.src} stack={clip.stack} poster={clip.poster} label={item.imageLabel} aspectRatio="672 / 496" />
+                ) : (
+                  <MediaSlot
+                    src={mediaFor(item.slot, language)}
+                    label={item.imageLabel}
+                    aspectRatio="672 / 496"
+                    width={672}
+                    height={496}
+                  />
+                )}
+                <div className={styles.copy}>
+                  <h3 className={styles.cardTitle}>
+                    <FramedText text={item.title} breaks={item.titleBreaks} />
+                  </h3>
+                  <p className={styles.cardText}>{item.text}</p>
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

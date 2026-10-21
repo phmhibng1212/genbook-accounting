@@ -18,7 +18,7 @@ import path from 'node:path'
 const FFMPEG = process.env.FFMPEG || 'ffmpeg'
 const DIR = 'src/assets/media'
 const FPS = 24
-const OUT_WIDTH = 1456 // the hero is shown at most ~800px wide, so 1456 covers a 2x screen
+const MAX_WIDTH = 1456 // the hero is shown at most ~800px wide, so 1456 covers a 2x screen; a smaller clip keeps its size
 const force = process.argv.includes('--force')
 
 const run = (args) => execFileSync(FFMPEG, ['-v', 'error', '-y', ...args], { stdio: ['ignore', 'inherit', 'inherit'] })
@@ -35,8 +35,8 @@ async function encode(webm) {
   const info = JSON.parse(probe(webm))
   const { width: srcW, height: srcH } = info.streams[0]
   const duration = Number(info.format.duration)
-  const width = OUT_WIDTH
-  const height = Math.round((OUT_WIDTH * srcH) / srcW / 2) * 2
+  const width = Math.min(srcW, MAX_WIDTH) & ~1
+  const height = Math.round((width * srcH) / srcW / 2) * 2
 
   // still: the last frame, with its transparency
   run(['-c:v', 'libvpx-vp9', '-sseof', '-0.08', '-i', webm, '-frames:v', '1', '-vf', `scale=${width}:${height}:flags=lanczos`, '-pix_fmt', 'rgba', '-c:v', 'libwebp', '-quality', '88', '-compression_level', '6', `${base}.poster.webp`])
