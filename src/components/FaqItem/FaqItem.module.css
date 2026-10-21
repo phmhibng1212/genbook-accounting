@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--space-32);
-  column-gap: 0;
+  column-gap: var(--md);
   align-items: center;
   width: 100%;
   min-height: var(--space-44);
