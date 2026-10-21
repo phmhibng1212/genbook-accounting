@@ -77,6 +77,39 @@ gồm thời gian (múi giờ `Asia/Ho_Chi_Minh`), ngày `2026-10-21`, tuần IS
 
 Một số chữ trong Figma có lỗi gõ (ví dụ EN tablet "volume,and"); code dùng bản đúng chính tả.
 
+## Yêu cầu animation: chạy mượt và đúng trên mọi nền tảng
+
+**Yêu cầu của chủ sản phẩm:** animation phải chạy **mượt và đúng** trên desktop, tablet và mobile, ở các hệ **Windows, Android
+và iOS** (thêm macOS vì Safari desktop cùng nhóm lỗi với iOS).
+
+"Đúng" nghĩa là, với cả 8 animation (hero, 3 step, 4 feature) ở cả EN và VI:
+
+1. Chạy **một lần** khi section vào khung nhìn (40% hiển thị), **không lặp**.
+2. Dừng và **giữ khung cuối** khi chạy xong.
+3. Khi cuộn ra khỏi khung nhìn hoàn toàn thì tua về đầu, cuộn quay lại thì **chạy lại**.
+4. Nền **trong suốt** (không có nền đen hay viền), đúng tỷ lệ khung, không giật, không nhấp nháy lúc bắt đầu.
+5. Không làm cuộn trang giật, không gây tràn ngang, không có điều khiển video hiện ra (kể cả iOS).
+
+**Ma trận cần nghiệm thu** (mỗi ô chạy đủ 5 điều trên):
+
+| Nền tảng | Trình duyệt | Cơ chế dùng | Trạng thái |
+| --- | --- | --- | --- |
+| Windows desktop | Chrome, Edge, Firefox | WebM VP9 có alpha | Chromium đã kiểm tra trên Linux; **Windows chưa thử trên máy thật** |
+| macOS desktop | Safari, Chrome | Safari: `*.stack.mp4` + WebGL; Chrome: WebM | **Chưa thử** |
+| Android phone / tablet | Chrome, Samsung Internet | WebM VP9 có alpha | **Chưa thử trên máy thật** |
+| iPhone / iPad | Safari và mọi trình duyệt iOS | `*.stack.mp4` + WebGL (iOS không giải mã được alpha của WebM) | **Chưa thử**, mới kiểm tra shader bằng tính toán |
+
+Cách kiểm tra trên máy thật: mở trang, cuộn chậm qua từng section, quan sát 5 điều trên; đổi EN/VI; xoay ngang/dọc với
+tablet và điện thoại; thử chế độ tiết kiệm pin. Nếu ô nào không đạt thì ghi lại máy, trình duyệt, animation nào lỗi.
+
+Lưu ý đã biết cho dev:
+
+- Clip chạy **kể cả khi người dùng bật "giảm chuyển động"** (clip là nội dung chính); chỉ hiệu ứng hiện dần khi cuộn mới bị giảm.
+- iOS chỉ cho video tự chạy khi tắt tiếng và `playsinline`; `ClipPlayer` đã đặt sẵn, cần xác nhận trên máy thật, đặc biệt
+  khi bật Low Power Mode.
+- Nếu thiết bị không có WebGL thì hiện ảnh tĩnh `*.poster.webp` (khung cuối) thay vì animation.
+- Với thiết bị yếu, theo dõi dung lượng clip (`src/assets/media`, đã nén CRF 30) và số clip chạy cùng lúc.
+
 ## Animation / media
 
 - File ở `src/assets/media/`, đặt tên `<slot>.<lang>.<đuôi>`; slot: `hero`, `step-1..3`, `feature-1..4`. Tìm theo tên, thay file
