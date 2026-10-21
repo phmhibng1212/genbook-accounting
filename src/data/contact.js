@@ -1,29 +1,14 @@
 /*
- * Sends the "Schedule a demo" form to the Google Apps Script web app in scripts/google-sheets/Code.gs, which appends
- * one row to the Google Sheet (see README → "Contact form → Google Sheet").
+ * Sends the "Schedule a demo" form.
  *
- * The endpoint comes from `VITE_CONTACT_ENDPOINT` (the web app's /exec URL). While it is not set the request is
- * only simulated (resolves after a short delay, nothing is sent) so the page still works in development.
+ * NOT CONNECTED YET: the page has the form's interface and validation only, so this resolves after a short delay
+ * without sending anything. Replace the body with the real request (an API endpoint, a form service, …) and keep
+ * the contract: resolve when the request was accepted, reject (throw) when it was not — the modal shows its
+ * success or failure message from that.
  *
- * Contract with the modal: resolve when the request was accepted, throw when it was not.
  * `values` = { fullName, phone, email, industry, company, message }, every value already trimmed.
  */
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT
-
 export async function submitContact(values) {
-  if (!ENDPOINT) {
-    await new Promise((resolve) => setTimeout(resolve, 700))
-    return
-  }
-
-  const payload = { ...values, language: document.documentElement.lang || 'en', page: window.location.href }
-  // text/plain keeps this a "simple" request: Apps Script web apps do not answer CORS preflights
-  const response = await fetch(ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload),
-  })
-  if (!response.ok) throw new Error(`Contact request failed (${response.status})`)
-  const result = await response.json()
-  if (!result.ok) throw new Error(result.error || 'Contact request rejected')
+  void values
+  await new Promise((resolve) => setTimeout(resolve, 700))
 }
