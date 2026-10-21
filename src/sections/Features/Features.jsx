@@ -1,5 +1,5 @@
 import FeatureRow from '../../components/FeatureRow/FeatureRow'
-import { mediaFor } from '../../data/media'
+import { clipFor, mediaFor } from '../../data/media'
 import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './Features.module.css'
 
@@ -36,6 +36,7 @@ export default function Features() {
               key={row.id}
               {...row}
               mediaFirstOnMobile={features.mobileMediaFirst && index > 0}
+              clip={clipFor(row.slot, language)}
               imageSrc={mediaFor(row.slot, language)}
             />
           ))}

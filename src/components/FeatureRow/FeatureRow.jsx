@@ -1,4 +1,5 @@
 import FramedText from '../FrameBreak/FrameBreak'
+import ClipPlayer from '../ClipPlayer/ClipPlayer'
 import MediaSlot from '../MediaSlot/MediaSlot'
 import { bulletIcon } from '../../data/media'
 import styles from './FeatureRow.module.css'
@@ -10,7 +11,7 @@ import styles from './FeatureRow.module.css'
  * Mobile: copy above the visual, unless `mediaFirstOnMobile` puts the visual first.
  * `gap` is the Figma gap between the two on desktop, in px (80 / 89).
  */
-export default function FeatureRow({ title, titleBreaks, bullets, imageSrc, imageLabel, reverse = false, gap = '80', mediaFirstOnMobile = false }) {
+export default function FeatureRow({ title, titleBreaks, bullets, clip, imageSrc, imageLabel, reverse = false, gap = '80', mediaFirstOnMobile = false }) {
   return (
     <div
       className={`${styles.row} ${reverse ? styles.reverse : ''} ${mediaFirstOnMobile ? styles.mediaFirst : ''}`}
@@ -33,7 +34,11 @@ export default function FeatureRow({ title, titleBreaks, bullets, imageSrc, imag
       </div>
 
       <div className={styles.media} data-reveal="image">
-        <MediaSlot src={imageSrc} label={imageLabel} aspectRatio="1292 / 948" width={1292} height={948} />
+        {clip ? (
+          <ClipPlayer src={clip.src} stack={clip.stack} poster={clip.poster} label={imageLabel} aspectRatio="1292 / 948" />
+        ) : (
+          <MediaSlot src={imageSrc} label={imageLabel} aspectRatio="1292 / 948" width={1292} height={948} />
+        )}
       </div>
     </div>
   )

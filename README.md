@@ -61,8 +61,10 @@ Two kinds of file:
   cannot decode a WebM's alpha channel (black background), so there `ClipPlayer` plays `<slot>.<lang>.stack.mp4` instead: H.264
   with the premultiplied colour on the left and the alpha matte on the right, merged by a small WebGL canvas
   (`stackedAlpha.js`); without WebGL the still picture `<slot>.<lang>.poster.webp` (the last frame) shows.
-  After adding or replacing a WebM, run `node scripts/encode-clips.mjs --force` (needs `ffmpeg` on the PATH with libvpx,
-  libx264 and libwebp) to rebuild the `.stack.mp4` and `.poster.webp`. Safari / iOS playback has not been tested on a real device.
+  After adding or replacing a WebM: run `node scripts/optimise-clips.mjs` (the Figma export is ~3.4 Mbit/s; at CRF 30 a clip is
+  4–6x smaller with no visible difference, and an optimised file is never compressed twice), then
+  `node scripts/encode-clips.mjs --force` to rebuild the `.stack.mp4` and `.poster.webp`. Both need `ffmpeg` on the PATH with
+  libvpx, libx264 and libwebp. Safari / iOS playback has not been tested on a real device.
 
 ## Contact modal ("Schedule a demo")
 
