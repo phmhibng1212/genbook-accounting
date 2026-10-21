@@ -31,7 +31,7 @@ the DOM differs (the Hero decoration). Wider than 1280 the page keeps its 80px i
 - `src/sections/` — Hero, Steps ("3 Simple Steps"), Features, Pricing, Faq, Cta.
 - `src/data/content.js` — all copy (EN); `content.vi.js` patches it for Vietnamese.
 - `src/data/media.js` — picks up the animated artwork by file name (see below).
-- `src/data/contact.js` — where the contact form is sent (**not connected yet**, see below).
+- `src/data/contact.js` — where the contact form is sent (Google Sheet via Apps Script, see "Contact form → Google Sheet").
 - `src/hooks/` — `useScrollReveal` (one shared IntersectionObserver), `useBreakpoint`, `useScrolled`.
 
 Pricing, the contact panel (CTA) and the footer are unchanged from the previous design; they were kept as they were.
@@ -73,10 +73,32 @@ Desktop and tablet: a 683px card centred over a 60% black backdrop. Mobile: a sh
 20px in from each side. Escape, the close button and a tap on the backdrop close it; focus is trapped inside and returned
 to the button; the page behind is `inert` and does not scroll (`position: fixed` body, so it also holds on iOS).
 
-The form is **interface and validation only**. Name, phone and email are required (phone: 8–15 digits, `+ ( ) . -` and
-spaces allowed; email: `a@b.cc`); industry, company and message are optional. A valid form calls
-`submitContact(values)` in `data/contact.js`, which today only waits and resolves — nothing is sent. Replace its body with
-the real request; the modal shows its success view when it resolves and an error line when it throws.
+The form validates on the client: name, phone and email are required (phone: 8–15 digits, `+ ( ) . -` and spaces allowed;
+email: `a@b.cc`); industry, company and message are optional. A valid form calls `submitContact(values)` in
+`data/contact.js`; the modal shows its success view when it resolves and an error line when it throws.
+
+## Contact form → Google Sheet
+
+`data/contact.js` POSTs the form (plus `language` and `page`) to a Google Apps Script web app, which appends a row to a
+Google Sheet. Until `VITE_CONTACT_ENDPOINT` is set the submit is only simulated.
+
+Sheet layout (built by `setup()` in `scripts/google-sheets/Code.gs`): **Data** (one row per submission: time, day
+`2026-10-21`, ISO week `2026-W43`, month `2026-10`, year, language, name, phone, email, industry, company, message,
+page), then **Ngày / Tuần / Tháng / Năm** (choose a period in B1 to list its contacts; columns K:L count contacts per
+period) and **Hướng dẫn**. Times use `Asia/Ho_Chi_Minh`.
+
+Set-up (once):
+
+1. Open the target Google Sheet → Extensions → Apps Script. Replace the code with `scripts/google-sheets/Code.gs`.
+2. Run `setup()` (authorise when asked): it creates the tabs, formulas and formatting.
+3. Deploy → New deployment → type *Web app* → Execute as **Me**, Who has access **Anyone** → copy the `/exec` URL
+   (opening it in a browser must answer `{"ok":true,…}`).
+4. Put the URL in `.env.local` as `VITE_CONTACT_ENDPOINT=<url>` (see `.env.example`) and rebuild. After changing
+   `Code.gs`, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
+
+The script validates again on the server (required fields, email shape, length caps) and takes a script lock so
+simultaneous submissions never overwrite each other. The web app URL is public by nature; anyone who has it can add rows,
+so keep it out of public docs and treat the sheet as untrusted input.
 
 ## Languages (EN / VI)
 
