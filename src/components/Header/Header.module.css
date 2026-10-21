@@ -24,22 +24,15 @@
   padding: var(--xl) 0;
 }
 
-/* Vietnamese labels are longer. Figma: 20px between the three columns, the menu centred on the page (the logo
-   and the actions are equal-width columns). A grid keeps that, and lets a side column grow past its share
-   when its content is wider. The gap between menu buttons is 0 at 1372px, the narrowest the menu can still be
-   centred, and opens up to the designed 8px by 1420px. */
-.compact {
-  --compact-nav-from: 1372px;
-}
-
+/* Vietnamese labels are longer: Figma tightens the gap between the three columns to 20px and the padding of each
+   menu button to 8px (the menu then fits the 1120px container at the 1280 frame). */
 .compact .container {
-  display: grid;
-  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
   gap: var(--space-20);
 }
 
-.compact .nav {
-  gap: clamp(0px, calc((100vw - var(--compact-nav-from)) / 6), var(--xs));
+.compact .nav a {
+  padding-right: var(--xs);
+  padding-left: var(--xs);
 }
 
 .brand {
@@ -57,13 +50,13 @@
   gap: var(--xs);
 }
 
+/* the logo column takes what is left, so the menu sits next to the actions (Figma: Col / Nav / Actions) */
 .actions {
   display: flex;
-  flex: 1 0 0;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: flex-end;
   gap: var(--md);
-  min-width: 1px;
 }
 
 /* ---- menu (tablet / mobile only) ---- */
@@ -119,11 +112,6 @@
 
 /* ---- tablet frame (800) ---- */
 @media (max-width: 1279px) {
-  .compact .container {
-    display: flex;
-    gap: var(--space-20);
-  }
-
   .header {
     padding: 0 var(--space-64);
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
